@@ -4,15 +4,14 @@ class CompositionPart:
     _material: str
     _role: str
 
-    def get_part_id (self):
+    def get_part_id(self):  # PRIMARY KEY
         if self._part_id == 0:
             return "Not Present"
         return self._part_id
 
-    def set_geo_unit (self, geo_unit):   #stessa di bounaryID, è un problema?
-        self._geo_unit = geo_unit
-
-    def get_geo_unit (self):
+    def get_geo_unit(self):  # FOREIGN KEY
+        if self._geo_unit == 0:
+            return "Not Present"
         return self._geo_unit
 
     def get_material(self):
@@ -26,3 +25,4 @@ class CompositionPart:
 
     def set_role(self, role):
         self._role = role
+
