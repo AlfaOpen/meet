@@ -4,15 +4,24 @@ from repository.connection.connection import Connection, close_connection
 from repository.dao.bootstrap_schema import BoostrapSchema
 from repository.reader.csv_reader import CSVReader
 
+import pandas
 
 def main():
     csv = CSVReader(10)
-    filename = r'C:\Users\giuli\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\BoundaryInfo\CSV\TE_u_east.csv'
-    csv.load_csv(filename)
-    print(csv.data.values)
+    import openpyxl
+    filename = r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\BoundaryInfo\top_Carb_west.xlsx"
+    csv.load_excel(filename)
+    print(csv.data)
+    riga = csv.data[csv.data.index == 1]
+    print(list(csv.data))
+    # print (riga['Name'][3])
 
-    # csv.retrieve_column(csv.data, ['2'])
+
+    # print(csv.data)
+    # csv.retrieve_column(csv.data, ['Id', 'x', 'Name'])
     # print(csv.column_data)
+
+
 
     opened_connection = Connection()
 
