@@ -1,14 +1,19 @@
 class Isoline:
-    _isoline_id: int
-    _filename: str
-    _name: str
-    _boundary_id: int
-    _iso_type: str
+
+    def __init__(self):
+        self._isoline_id = None
+        self._filename = None
+        self._name = None
+        self._boundary_id = None
+        self._iso_type = None
 
     def get_isoline_id(self):  # PRIMARY KEY
         if self._isoline_id == 0:
             return "Not Present"
         return self._isoline_id
+
+    def set_isoline_id(self, isoline_id):
+        self._isoline_id = isoline_id
 
     def get_filename(self):
         return self._filename
@@ -26,6 +31,9 @@ class Isoline:
         if self._boundary_id == 0:
             return "Not Present"
         return self._boundary_id
+
+    def set_boundary_id(self, boundary_id):
+        self._boundary_id = boundary_id
 
     def get_iso_type(self):
         return self._iso_type

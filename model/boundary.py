@@ -1,8 +1,10 @@
 class Boundary:
-    _boundary_id: int
-    _name: str
-    _contact_type: str
-    _geo_unit: str
+
+    def __init__(self):
+        self._boundary_id = None
+        self._name = None
+        self._contact_type = None
+        self._geo_unit = None
 
     def set_name(self, name):
         self._name = name
@@ -14,6 +16,9 @@ class Boundary:
         if self._boundary_id == 0:
             return "Not Present"
         return self._boundary_id
+
+    def set_boundary_id(self, boundary_id):
+        self._boundary_id = boundary_id
 
     def set_contact_type(self, contact_type):
         self._contact_type = contact_type

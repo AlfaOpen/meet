@@ -1,14 +1,19 @@
 class GeologicUnit:
-    _geo_unit_id: int
-    _name: str
-    _description: str
-    _ref_geo_unit: int
-    _geo_unit_type: str
+
+    def __init__(self):
+        self._geo_unit_id = None
+        self._name = None
+        self._description = None
+        self._ref_geo_unit = None
+        self._geo_unit_type = None
 
     def get_geo_unit_id(self):  # PRIMARY KEY
         if self._geo_unit_id == 0:
             return "Not Present"
         return self._geo_unit_id
+
+    def set_geo_unit_id(self, geo_unit_id):
+        self._geo_unit_id = geo_unit_id
 
     def get_name(self):
         return self._name
