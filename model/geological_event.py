@@ -7,20 +7,14 @@ class GeologicalEvent:
         self._younger_named_age = None
 
     def get_era_id(self):  # PRIMARY KEY
-        if self._era_id == 0:
+        if self._era_id is None:
             return "Not Present"
         return self._era_id
-
-    def set_era_id(self, era_id):
-        self._era_id = era_id
 
     def get_geo_unit(self):  # FOREIGN KEY
         if self._geo_unit == 0:
             return "Not Present"
         return self._geo_unit
-
-    def set_geo_unit(self, geo_unit):
-        self._geo_unit = geo_unit
 
     def get_older_named_age(self):
         return self._older_named_age
@@ -33,4 +27,3 @@ class GeologicalEvent:
 
     def set_younger_named_age(self, younger_named_age):
         self._younger_named_age = younger_named_age
-
