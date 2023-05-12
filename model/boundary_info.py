@@ -26,6 +26,7 @@ class BoundaryInfo:
 
     def set_x(self, x):
         self._x = x
+        print ("hello")
 
     def get_x(self):
         return self._x

@@ -1,27 +1,62 @@
 import logging
 
+from dto.boundary_info_dto import BoundaryInfoDto
+from model.boundary_info import BoundaryInfo
 from repository.connection.connection import Connection, close_connection
 from repository.dao.bootstrap_schema import BoostrapSchema
 from repository.reader.csv_reader import CSVReader
 
 import pandas
 
+from utility.parser import Parser
+
+
 def main():
-    csv = CSVReader(10)
+    csv = CSVReader()
     import openpyxl
     filename = r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\BoundaryInfo\top_Carb_west.xlsx"
     csv.load_excel(filename)
-    print(csv.data)
-    riga = csv.data[csv.data.index == 1]
-    print(list(csv.data))
-    # print (riga['Name'][3])
+    # print(csv.data)
+    riga = csv.data[csv.data.index == 3]
+    print(riga)
 
+    # print (riga['Name'][3])
+    # a = type(csv)
+
+    #  ESEMPIO REFLECTION CON CLASSE E METODO
+    # class MyClass:
+    #
+    #     def __init__(self):
+    #         self.abc = 2
+    #
+    #     def sole(self):
+    #         print("hello")
+
+    # print(MyClass())
+
+    # a = "MyClass"
+    # instanza = locals()[a]()
+    # print(instanza.abc)
+    # metodo1 = "sole"
+    # metodo2 = getattr(instanza, metodo1)
+    # metodo2()
+
+    # metodo = "set_" + list(csv.data)[1]
+    # print(metodo)
+    # nome = BoundaryInfoDto()
+    # name = "BoundaryInfo"
+    # istanza1 = globals()[name]()
+    # metodo4 = getattr(istanza1, metodo)
+    # (metodo4(2))
+    # print(istanza1.get_x())
 
     # print(csv.data)
     # csv.retrieve_column(csv.data, ['Id', 'x', 'Name'])
     # print(csv.column_data)
 
-
+    nome = "HelloIOhhhPm"
+    parser = Parser()
+    print(parser.parse_method_name(nome))
 
     opened_connection = Connection()
 
