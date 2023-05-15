@@ -11,7 +11,6 @@ class BoostrapSchema:
             cursor.execute(i)
 
     def commit_query(self, connection):
-        cursor = connection.cursor()
         for i in self.table_list:
             connection.commit()
 
@@ -119,10 +118,10 @@ def isoline():
     table_isoline = '''CREATE TABLE IF NOT EXISTS public."Isoline"
     (
     "idIsoline" integer NOT NULL,
-    "Filename" "char",
-    "name" "char",
+    "Filename" varchar,
+    "name" varchar,
     "BoundaryId" integer,
-    "isoType" "char",
+    "isoType" varchar,
     CONSTRAINT "Isoline_pkey" PRIMARY KEY ("idIsoline"),
     CONSTRAINT "Isoline_Boundaryid_fkey" FOREIGN KEY ("BoundaryId")
         REFERENCES public."Boundary" ("idBoundary") MATCH SIMPLE
