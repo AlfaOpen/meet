@@ -1,3 +1,30 @@
+from dto.isoline_info_dto import IsolineInfoDto
+from mapper.isoline_info_mapper import IsolineInfoMapper
+from mapper.isoline_mapper import IsolineMapper
+from model.isoline import Isoline
+from model.isoline_info import IsolineInfo
+from repository.dao.isoline_info_repository import IsolineInfoRepo
+from repository.dao.isoline_repository import IsolineRepo
+from repository.dynamic_load.dynamic_load import DynamicLoad
+from utility.parser import parse_method_name
+from dto.isoline_dto import IsolineDto
+from dto.boundary_dto import BoundaryDto
+from dto.boundary_info_dto import BoundaryInfoDto
+from dto.composition_part_dto import CompositionPartDto
+from dto.geologic_unit_dto import GeologicUnitDto
+from dto.geological_event_dto import GeologicalEventDto
+from mapper.boundary_info_mapper import BoundaryInfoMapper
+from mapper.boundary_mapper import BoundaryMapper
+from mapper.composition_part_mapper import CompositionPartMapper
+from mapper.geologic_unit_mapper import GeologicUnitMapper
+from mapper.geological_event_mapper import GeologicalEventMapper
+from repository.dao.boundary_info_repository import BoundaryInfoRepo
+from repository.dao.boundary_repository import BoundaryRepo
+from repository.dao.composition_part_repository import CompositionPartRepo
+from repository.dao.geologic_unit_repository import GeologicUnitRepo
+from repository.dao.geological_event_repository import GeologicalEventRepo
+
+
 class BoostrapSchema:
 
     def __init__(self):
@@ -154,3 +181,23 @@ def isoline_info():
         OWNER to giulia;'''
 
     return table_isoline_info
+
+
+# def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
+# uscita del mapper fa da solo il repository con le insert
+
+def mapper_cycle(excel_list, path, num_col, model_class_str, connection):
+    file_dto = (model_class_str + "Dto")
+    dynamic_load = DynamicLoad()
+    tabled = dynamic_load.to_dto(path, file_dto, num_col)
+    file_mapper = globals()[model_class_str + "Mapper"]()
+    str_par1 = parse_method_name(model_class_str)
+    metodo_par1 = "to_model_list_" + str_par1
+    metodo1 = getattr(file_mapper, metodo_par1)
+    models_list = metodo1(tabled)
+    file_repo = globals()[model_class_str + "Repo"](connection)
+    metodo_par2 = "populate_" + str_par1
+    metodo2 = getattr(file_repo, metodo_par2)
+    metodo2(models_list)
+
+    

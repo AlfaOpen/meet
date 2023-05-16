@@ -14,12 +14,16 @@ from utility.parser import parse_method_name
 
 class DynamicLoad:
 
-    def to_dto(self, path, file_dto, name_column):  # file dto è il nome del file dto che vogliamo riempire,
+    def to_dto(self, path, file_dto, index_col):  # file dto è il nome del file dto che vogliamo riempire,
         # name_column è la lista di colonne della tabella excel che vogliamo prendere (Nel caso non servissero tutte)
         csv = CSVReader()
         csv.load_excel(path)
         csv.num_rows(csv.data)
-        # nomi_col= list(csv.data)
+        if index_col is None or len(index_col) == 0:
+            nomi_col = list(csv.data)
+        else:
+            colonne = csv.data.iloc[:, index_col]
+            nomi_col = list(colonne)
         tabella = []
         k: int
         for i in range(0, csv.nrows):
@@ -27,12 +31,11 @@ class DynamicLoad:
             # diversa per ogni riga, quindi scorrendo nel ciclo riempio tutte le righe
             riga = csv.data[csv.data.index == i]
             k = 0
-            while k < len(name_column):
-                str_par = parse_method_name(name_column[k])
+            while k < len(nomi_col):
+                str_par = parse_method_name(nomi_col[k])
                 metodo_par = "set_" + str_par
                 metodo = getattr(istanza, metodo_par)
-                metodo(csv.data[name_column[k]][i])
+                metodo(csv.data[nomi_col[k]][i])
                 k += 1
             tabella.append(istanza)
-        return tabella
-
+        return print(tabella)
