@@ -13,8 +13,6 @@ class BoundaryDto:
         return self._name
 
     def get_boundary_id(self):
-        if self._boundary_id == 0:
-            return "Not Present"
         return self._boundary_id
 
     def set_boundary_id(self, boundary_id):

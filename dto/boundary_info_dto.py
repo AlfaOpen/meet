@@ -1,6 +1,6 @@
 class BoundaryInfoDto:
     def __init__(self):
-        self.info_3d_id = None
+        self._id = None
         self.boundary_id = None
         self.x = None
         self.y = None
@@ -8,16 +8,12 @@ class BoundaryInfoDto:
         self.thickness = None
 
     def get_id(self):  # PRIMARY KEY
-        if self.info_3d_id == 0:
-            return "Not Present"
-        return self.info_3d_id
+        return self._id
 
     def set_id(self, info_3d_id):
-        self.info_3d_id = info_3d_id
+        self._id = info_3d_id
 
     def get_boundary_id(self):  # FOREIGN KEY
-        if self.boundary_id == 0:
-            return "Not Present"
         return self.boundary_id
 
     def set_boundary_id(self, boundary_id):

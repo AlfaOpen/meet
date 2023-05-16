@@ -8,8 +8,6 @@ class GeologicUnitDto:
         self.geo_unit_type = None
 
     def get_geo_unit_id(self):  # PRIMARY KEY
-        if self._geo_unit_id == 0:
-            return "Not Present"
         return self._geo_unit_id
 
     def set_geo_unit_id(self, geo_unit_id):
