@@ -186,18 +186,24 @@ def isoline_info():
 # def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
 # uscita del mapper fa da solo il repository con le insert
 
-def mapper_cycle(excel_list, path, num_col, model_class_str, connection):
-    file_dto = (model_class_str + "Dto")
+def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
     dynamic_load = DynamicLoad()
-    tabled = dynamic_load.to_dto(path, file_dto, num_col)
-    file_mapper = globals()[model_class_str + "Mapper"]()
-    str_par1 = parse_method_name(model_class_str)
-    metodo_par1 = "to_model_list_" + str_par1
-    metodo1 = getattr(file_mapper, metodo_par1)
-    models_list = metodo1(tabled)
-    file_repo = globals()[model_class_str + "Repo"](connection)
-    metodo_par2 = "populate_" + str_par1
-    metodo2 = getattr(file_repo, metodo_par2)
-    metodo2(models_list)
+    for i in range(0, len(excel_list)):
+        path = excel_list[i]
+        lista_num_col = matrice_num_col[i]
+        model_class_str = name_models[i]
+        file_dto = (model_class_str + "Dto")
+        tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
+        print(tabled)
+        file_mapper = globals()[model_class_str + "Mapper"]()
+        str_par1 = parse_method_name(model_class_str)
+        metodo_par1 = "to_model_list_" + str_par1
+        metodo1 = getattr(file_mapper, metodo_par1)
+        models_list = metodo1(tabled)
+        file_repo = globals()[model_class_str + "Repo"](connection)
+        metodo_par2 = "populate_" + str_par1
+        metodo2 = getattr(file_repo, metodo_par2)
+        metodo2(models_list)
+
 
     

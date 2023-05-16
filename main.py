@@ -1,5 +1,7 @@
 import logging
 
+import numpy
+
 from dto.boundary_info_dto import BoundaryInfoDto
 from dto.isoline_dto import IsolineDto
 from mapper.boundary_info_mapper import BoundaryInfoMapper
@@ -42,20 +44,33 @@ def main():
     # boostrap_schema.execute_query(opened_connection.connection)
     # boostrap_schema.commit_query(opened_connection.connection)
 
-    excel_list= []
+    excel_list = [
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\referencedGeologicUnit.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Boundary.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\All_geologic_unit1.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Isoline.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\PL_u_contour.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\CompositionPart1.xlsx",
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
 
-    tabled = dynamic_load.to_dto(
-        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\tabelle\geochronologicEra1.xlsx", "GeologicalEventDto", [0,1,3,4])
-    #
+    lista_colonne_excel = [[], [], [0, 1, 2, 3, 4, 8], [], [1, 2, 5], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4]]
+    name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'Isoline', 'IsolineInfo', 'CompositionPart', 'GeologicalEvent']
+
+    # tabled = dynamic_load.to_dto(
+    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\tabelle\geochronologicEra1.xlsx",
+    #     "GeologicalEventDto", [0, 1, 3, 4])
+    # #
     # geological_event_mapper = GeologicalEventMapper()
     # models = geological_event_mapper.to_model_list_geological_event(tabled)
     #
     # geological_event_repo = GeologicalEventRepo(opened_connection.connection)
     # geological_event_repo.populate_geological_event(models)
 
-    # mapper_cycle(r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\Isoline\PL_u_contour.xlsx", ["ID", "isoValue", "IsolineId"], "IsolineInfo", opened_connection.connection)
-
-
+    mapper_cycle(excel_list, lista_colonne_excel, name_models, opened_connection.connection)
 
     close_connection(opened_connection.connection)
     print("Table created successfully in PostgresSQL ")

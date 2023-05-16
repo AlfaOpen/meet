@@ -38,4 +38,4 @@ class DynamicLoad:
                 metodo(csv.data[nomi_col[k]][i])
                 k += 1
             tabella.append(istanza)
-        return print(tabella)
+        return tabella
