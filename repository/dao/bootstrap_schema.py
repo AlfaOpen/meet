@@ -18,11 +18,11 @@ class BoostrapSchema:
 def geologic_unit():
     table_geologic_unit = '''CREATE TABLE IF NOT EXISTS public."GeologicUnit"
     (
-    "idGeoUnit" integer NOT NULL,
-    "name" "char",
-    "description" "char",
-    refGeoUnit "char",
-    "geologicUnitType" "char",
+    "idGeoUnit" varchar NOT NULL,
+    "name" varchar,
+    "description" varchar,
+    "refGeoUnit" varchar,
+    "geologicUnitType" varchar,
     CONSTRAINT "GeologicUnit_pkey" PRIMARY KEY ("idGeoUnit")
     )
     TABLESPACE pg_default;
@@ -35,10 +35,10 @@ def geologic_unit():
 def boundary():
     table_boundary = '''CREATE TABLE IF NOT EXISTS public."Boundary"
     (
-    "idBoundary" INT NOT NULL,
-    "name" "char",
-    "contactType" "char",
-    geoUnit INT,
+    "idBoundary" integer NOT NULL,
+    "name" varchar,
+    "contactType" varchar,
+    geoUnit varchar,
     CONSTRAINT "Boundary_pkey" PRIMARY KEY ("idBoundary"),
     CONSTRAINT geoUnit FOREIGN KEY (geoUnit)
         REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
@@ -57,10 +57,10 @@ def boundary_info():
     (
     "idInfo3D" integer NOT NULL,
     "boundaryId" integer,
-    "x" numeric,
-    "y" numeric,
-    "depth" numeric,
-    "thickness" numeric,
+    "x" float,
+    "y" float,
+    "depth" float,
+    "thickness" float,
     CONSTRAINT "BoundaryInfo_pkey" PRIMARY KEY ("idInfo3D"),
     CONSTRAINT "BoundaryInfo_Boundaryid_fkey" FOREIGN KEY ("boundaryId")
         REFERENCES public."Boundary" ("idBoundary") MATCH SIMPLE
@@ -78,9 +78,11 @@ def composition_part():
     table_composition_part = '''CREATE TABLE IF NOT EXISTS public."CompositionPart"
     (
     "idPart" integer NOT NULL,
-    geoUnit integer,
-    "Material" "char",
-    "Role" "char",
+    geoUnit varchar,
+    "Material1" varchar,
+    "Material2" varchar,
+    "Role1" varchar,
+    "Role2" varchar,
     CONSTRAINT "CompositionPart_pkey" PRIMARY KEY ("idPart"),
     CONSTRAINT "CompositionPart_geoUnit_fkey" FOREIGN KEY (geoUnit)
         REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
@@ -98,9 +100,9 @@ def geological_event():
     table_geological_event = '''CREATE TABLE IF NOT EXISTS public."GeologicalEvent"
     (
     "idEra" integer NOT NULL,
-    geoUnit integer,
-    "olderNamedAge" "char",
-    "YoungerNamedAge" "char",
+    geoUnit varchar,
+    "olderNamedAge" varchar,
+    "YoungerNamedAge" varchar,
     CONSTRAINT "GeologicalEvent_pkey" PRIMARY KEY ("idEra"),
     CONSTRAINT "GeologicalEvent_geoUnit_fkey" FOREIGN KEY (geoUnit)
         REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
@@ -117,13 +119,13 @@ def geological_event():
 def isoline():
     table_isoline = '''CREATE TABLE IF NOT EXISTS public."Isoline"
     (
-    "idIsoline" integer NOT NULL,
-    "Filename" varchar,
+    "idIsoline" varchar NOT NULL,
+    "filename" varchar,
     "name" varchar,
-    "BoundaryId" integer,
+    "boundaryId" integer,
     "isoType" varchar,
     CONSTRAINT "Isoline_pkey" PRIMARY KEY ("idIsoline"),
-    CONSTRAINT "Isoline_Boundaryid_fkey" FOREIGN KEY ("BoundaryId")
+    CONSTRAINT "Isoline_Boundaryid_fkey" FOREIGN KEY ("boundaryId")
         REFERENCES public."Boundary" ("idBoundary") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
@@ -138,11 +140,11 @@ def isoline():
 def isoline_info():
     table_isoline_info = '''CREATE TABLE IF NOT EXISTS public."IsolineInfo"
     (
-    "idCoordinate" integer NOT NULL,
-    "Isoline" integer,
-    "isoValue" numeric,
-    CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("idCoordinate"),
-    CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("Isoline")
+    "id" integer NOT NULL,
+    isoline varchar,
+    "isoValue" integer,
+    CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("isoline")
         REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
