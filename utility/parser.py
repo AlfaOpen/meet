@@ -18,5 +18,5 @@ def parse_method_name(method_name: str):
         new_method_name_str = new_method_name_str + new_method_name[i]
     return new_method_name_str
 
-def mapper_cycle
+# def mapper_cycle
     #scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni uscita del mapper fa da solo il repository con le insert

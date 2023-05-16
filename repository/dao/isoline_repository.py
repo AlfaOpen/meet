@@ -1,7 +1,7 @@
 from model.isoline import Isoline
 
 
-def model_to_tuple(model: Isoline):
+def model_to_tuple_iso(model: Isoline):
     return (str(model.get_isoline_id()),
             model.get_filename(),
             model.get_name(),
@@ -12,11 +12,10 @@ def model_to_tuple(model: Isoline):
 class IsolineRepo:
     insert_query = """ INSERT INTO "Isoline"  (
     "idIsoline",
-    "Filename",
+    "filename",
     "name",
-    "BoundaryId",
+    "boundaryId",
     "isoType") VALUES (%s, %s, %s, %s, %s)"""
-
 
     def __init__(self, connection):
         self.connection = connection
@@ -24,7 +23,6 @@ class IsolineRepo:
     def populate_isoline(self, models):
         cursor = self.connection.cursor()
         for i in models:
-            values = model_to_tuple(i)
-            print(values)
+            values = model_to_tuple_iso(i)
             cursor.execute(self.insert_query, values)
         self.connection.commit()
