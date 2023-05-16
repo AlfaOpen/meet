@@ -10,7 +10,7 @@ class IsolineInfoMapper:
         isoline_info.set_iso_value(isoline_info_dto.get_iso_value())
         return isoline_info
 
-    def to_model_list_iso_info(self, list_isoline_info_dto: list):
+    def to_model_list_isoline_info(self, list_isoline_info_dto: list):
         model_list = []
         for dto in list_isoline_info_dto:
             model_list.append(self.to_model(dto))

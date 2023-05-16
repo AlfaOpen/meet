@@ -13,7 +13,7 @@ class IsolineMapper:
         isoline.set_iso_type(isoline_dto.get_iso_type())
         return isoline
 
-    def to_model_list_iso(self, list_isoline_dto: list):
+    def to_model_list_isoline(self, list_isoline_dto: list):
         model_list = []
         for dto in list_isoline_dto:
             model_list.append(self.to_model(dto))

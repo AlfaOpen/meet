@@ -20,7 +20,7 @@ class GeologicUnitRepo:
     def __init__(self, connection):
         self.connection = connection
 
-    def populate_geo(self, models):
+    def populate_geologic_unit(self, models):
         cursor = self.connection.cursor()
         for i in models:
             values = model_to_tuple_geo(i)

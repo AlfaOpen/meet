@@ -11,7 +11,7 @@ class GeologicUnitMapper:
         geologic_unit.set_geo_unit_type(geologic_unit_dto.get_geo_unit_type())
         return geologic_unit
 
-    def to_model_list_geo(self, list_geo_dto: list):
+    def to_model_list_geologic_unit(self, list_geo_dto: list):
         model_list = []
         for dto in list_geo_dto:
             model_list.append(self.to_model(dto))
