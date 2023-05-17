@@ -194,7 +194,6 @@ def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
         model_class_str = name_models[i]
         file_dto = (model_class_str + "Dto")
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
-        print(tabled)
         file_mapper = globals()[model_class_str + "Mapper"]()
         str_par1 = parse_method_name(model_class_str)
         metodo_par1 = "to_model_list_" + str_par1

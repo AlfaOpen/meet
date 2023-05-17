@@ -49,7 +49,7 @@ def main():
         r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\referencedGeologicUnit.xlsx",
         r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Boundary.xlsx",
         r"C:\Users\giuli\OneDrive\Desktop\Progetto "
-        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\All_geologic_unit1.xlsx",
+        r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\All_geologic_unit_mini.xlsx",
         r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Isoline.xlsx",
         r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\PL_u_contour.xlsx",
         r"C:\Users\giuli\OneDrive\Desktop\Progetto "
@@ -57,7 +57,7 @@ def main():
         r"C:\Users\giuli\OneDrive\Desktop\Progetto "
         r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
 
-    lista_colonne_excel = [[], [], [0, 1, 2, 3, 4, 8], [], [1, 2, 5], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4]]
+    lista_colonne_excel = [[], [], [], [], [1, 2, 5], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4]]
     name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'Isoline', 'IsolineInfo', 'CompositionPart', 'GeologicalEvent']
 
     # tabled = dynamic_load.to_dto(

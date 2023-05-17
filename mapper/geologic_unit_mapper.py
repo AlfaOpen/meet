@@ -15,5 +15,4 @@ class GeologicUnitMapper:
         model_list = []
         for dto in list_geo_dto:
             model_list.append(self.to_model(dto))
-            print(model_list)
         return model_list
