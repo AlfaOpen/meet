@@ -188,10 +188,14 @@ def isoline_info():
 
 def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
     dynamic_load = DynamicLoad()
+    for i in excel_list:
+        if i == 'GeologicUnit.xlsx':
+            excel_list.insert(0, i)
     for i in range(0, len(excel_list)):
-        path = excel_list[i]
+        file = excel_list[i]
+        path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
         lista_num_col = matrice_num_col[i]
-        model_class_str = name_models[i]
+        model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
         file_mapper = globals()[model_class_str + "Mapper"]()
@@ -204,5 +208,6 @@ def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
         metodo2 = getattr(file_repo, metodo_par2)
         metodo2(models_list)
 
+#def clear_schema:
 
     
