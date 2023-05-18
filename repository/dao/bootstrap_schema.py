@@ -174,6 +174,15 @@ def isoline_info():
     "id" integer NOT NULL,
     isoline varchar,
     "isoValue" integer,
+    "x" float,
+    "y" float,
+    "idIsobata" integer,
+    "vertexIndex" integer,
+    "vertexPart" integer,
+    "vertexPartIndex" integer,
+    "distance" float,
+    "angle" float,
+    
     CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("isoline")
         REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE

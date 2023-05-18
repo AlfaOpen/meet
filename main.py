@@ -41,36 +41,32 @@ def main():
     if not Connection.check_connection(opened_connection.connection):
         return logging.info("Error in connection")
 
-    # boostrap_schema = BoostrapSchema()
-    # boostrap_schema.execute_query(opened_connection.connection)
-    # boostrap_schema.commit_query(opened_connection.connection)
+    boostrap_schema = BoostrapSchema()
+    boostrap_schema.execute_query(opened_connection.connection)
+    boostrap_schema.commit_query(opened_connection.connection)
 
     # clear_schema(opened_connection.connection)
 
+    # excel_list = [ r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+    # r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\referencedGeologicUnit.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Boundary.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+    # r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\All_geologic_unit.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Isoline.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto
+    # ISPRA\Test_Dataset_PoBasin\dati_geologici_database\PL_u_contour.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+    # r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\CompositionPart1.xlsx",
+    # r"C:\Users\giuli\OneDrive\Desktop\Progetto "
+    # r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
 
-
-    # excel_list = [
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto "
-    #     r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\referencedGeologicUnit.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Boundary.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto "
-    #     r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\All_geologic_unit.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\Isoline.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database\PL_u_contour.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto "
-    #     r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\CompositionPart1.xlsx",
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto "
-    #     r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
-
-    lista_colonne_excel = [[], [], [], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [1, 2, 5]]
+    lista_colonne_excel = [[], [], [], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [0, 1, 2, 3, 6, 7, 8, 9, 10]]
     name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'CompositionPart',
                    'GeologicalEvent', 'Isoline', 'IsolineInfo']
 
-    mapper_cycle(opened_connection.connection)
-
+    # mapper_cycle(opened_connection.connection)
 
     close_connection(opened_connection.connection)
-
 
 
 if __name__ == '__main__':
