@@ -1,3 +1,4 @@
+import ast
 import cmd
 import logging
 import os
@@ -13,7 +14,7 @@ from mapper.isoline_info_mapper import IsolineInfoMapper
 from mapper.isoline_mapper import IsolineMapper
 from model.boundary_info import BoundaryInfo
 from repository.connection.connection import Connection, close_connection
-from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle
+from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema
 from repository.dao.boundary_info_repository import BoundaryInfoRepo
 from repository.dao.boundary_repository import BoundaryRepo
 from repository.dao.composition_part_repository import CompositionPartRepo
@@ -43,33 +44,9 @@ def main():
     # boostrap_schema = BoostrapSchema()
     # boostrap_schema.execute_query(opened_connection.connection)
     # boostrap_schema.commit_query(opened_connection.connection)
-    lista = os.listdir(r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
-    lista.insert(0, 'abc')
-    print(lista)
 
-    for i in lista:
-        if i == "GeologicUnit.xlsx":
-            print(i)
-            lista.insert(0, i)
-            break
-    print(lista)
+    # clear_schema(opened_connection.connection)
 
-
-    # for i in range(0, len(lista)):
-    #     file = lista[i]
-    #     path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
-    #     # a = "ciao.xlsx"
-    #     model_class_str = file[0:-5]
-
-    # a = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\"+ lista [0]
-    # csv = CSVReader()
-    # csv.load_excel(a)
-    # print(csv.data)
-    # col= input ('Inserisci una lista contenente gli indici delle colonne che vuoi inserire')
-    #
-    # file = lista[0]
-    # model_class_str = file[0:-5]
-    # print(model_class_str)
 
 
     # excel_list = [
@@ -85,14 +62,15 @@ def main():
     #     r"C:\Users\giuli\OneDrive\Desktop\Progetto "
     #     r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
 
-    lista_colonne_excel = [[], [], [], [], [1, 2, 5], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4]]
-    name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'Isoline', 'IsolineInfo', 'CompositionPart',
-                   'GeologicalEvent']
+    lista_colonne_excel = [[], [], [], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [1, 2, 5]]
+    name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'CompositionPart',
+                   'GeologicalEvent', 'Isoline', 'IsolineInfo']
 
-    # mapper_cycle(excel_list, lista_colonne_excel, name_models, opened_connection.connection)
+    mapper_cycle(opened_connection.connection)
+
 
     close_connection(opened_connection.connection)
-    print("Table created successfully in PostgresSQL ")
+
 
 
 if __name__ == '__main__':

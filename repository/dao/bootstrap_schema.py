@@ -1,3 +1,6 @@
+import ast
+import os
+
 from dto.isoline_info_dto import IsolineInfoDto
 from mapper.isoline_info_mapper import IsolineInfoMapper
 from mapper.isoline_mapper import IsolineMapper
@@ -40,6 +43,7 @@ class BoostrapSchema:
     def commit_query(self, connection):
         for i in self.table_list:
             connection.commit()
+        print("Table created successfully in PostgresSQL ")
 
 
 def geologic_unit():
@@ -186,15 +190,25 @@ def isoline_info():
 # def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
 # uscita del mapper fa da solo il repository con le insert
 
-def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
+def mapper_cycle(connection):
+    excel_list = os.listdir(
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
     dynamic_load = DynamicLoad()
-    for i in excel_list:
-        if i == 'GeologicUnit.xlsx':
-            excel_list.insert(0, i)
+    for i in range(0, len(excel_list)):
+        item = excel_list[i]
+        if item == "GeologicUnit.xlsx":
+            excel_list.insert(0, excel_list.pop(i))
+            break
     for i in range(0, len(excel_list)):
         file = excel_list[i]
         path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
-        lista_num_col = matrice_num_col[i]
+        lista_num_col = []
+        input_col = input(
+            "Selezionare le colonne di " + file + ":\n Inserire 'all' se si vogliono tutte le colonne, oppure una "
+                                                  "lista con gli indici delle relative colonne\n")
+        if input_col != 'all':
+            ind_list = ast.literal_eval(input_col)
+            lista_num_col = ind_list
         model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
@@ -207,7 +221,13 @@ def mapper_cycle(excel_list, matrice_num_col, name_models, connection):
         metodo_par2 = "populate_" + str_par1
         metodo2 = getattr(file_repo, metodo_par2)
         metodo2(models_list)
+    print('Insert effettuate correttamente')
 
-#def clear_schema:
 
-    
+def clear_schema(connection):
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", 
+    public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit"'''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    connection.commit()
+    print('Tutte le tabelle sono state eliminate')
