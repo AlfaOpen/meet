@@ -33,7 +33,7 @@ class BoostrapSchema:
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
                            isoline(), isoline_info(), composition_part(),
-                           geological_event()]
+                           geological_event(), faults(), faults_shp(), faults_all_3d()]
 
     def execute_query(self, connection):
         cursor = connection.cursor()
@@ -196,10 +196,91 @@ def isoline_info():
     return table_isoline_info
 
 
+def faults():
+    table_faults = '''CREATE TABLE IF NOT EXISTS public."Faults"
+    (
+    "id" varchar NOT NULL,
+    "dipAngle" varchar,
+    "dipDirect" varchar,
+    "evalMeth"  varchar,
+    "observMeth" varchar,
+    "fid" integer,
+    "faultSys" varchar,
+    "faultType" varchar,
+    "length" integer,
+    "localName" varchar,
+    "meanDip" integer,
+    "meanDipAzi" integer,
+    "meanStrike" integer,
+    "youngUnit"  varchar,
+    "oldUnit" varchar,
+    "refType" varchar,
+    "reference" varchar,
+    "strike" varchar,
+    "uri" varchar,
+    
+    CONSTRAINT "Faults._pkey" PRIMARY KEY ("id")
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."Faults"
+        OWNER to giulia;'''
+
+    return table_faults
+
+
+def faults_shp():
+    table_faults_shp = '''CREATE TABLE IF NOT EXISTS public."FaultsShp"
+    (
+    "id" integer NOT NULL,
+    "faultId" varchar,
+    "x" float,
+    "y" float,
+    "localName" varchar,
+    "vertexIndex" integer,
+    "vertexPart" integer,
+    "vertexPartIndex" integer,
+    "distance" float,
+    "angle" float,
+
+    CONSTRAINT "FaultsShp_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "FaultsShp_Faults_fkey" FOREIGN KEY ("faultId")
+        REFERENCES public."Faults" ("id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."FaultsShp"
+        OWNER to giulia;'''
+    
+    return table_faults_shp
+
+
+def faults_all_3d():
+    table_faults_all_3d = '''CREATE TABLE IF NOT EXISTS public."FaultsAll3d"
+    (
+    "id" integer NOT NULL,
+    "faultId" varchar,
+    "x" float,
+    "y" float,
+    "depth" float,
+    "localName" varchar,
+
+    CONSTRAINT "FaultsAll3d_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "FaultsAll3d_Faults_fkey" FOREIGN KEY ("faultId")
+        REFERENCES public."Faults" ("id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."FaultsAll3d"
+        OWNER to giulia;'''
+
+    return table_faults_all_3d
+
 # def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
 # uscita del mapper fa da solo il repository con le insert
 
-def mapper_cycle(connection):
+def mapper_cycle(connection, lista_colonne):
     excel_list = os.listdir(
         r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
     dynamic_load = DynamicLoad()
@@ -211,13 +292,15 @@ def mapper_cycle(connection):
     for i in range(0, len(excel_list)):
         file = excel_list[i]
         path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
-        lista_num_col = []
-        input_col = input(
-            "Selezionare le colonne di " + file + ":\n Inserire 'all' se si vogliono tutte le colonne, oppure una "
-                                                  "lista con gli indici delle relative colonne\n")
-        if input_col != 'all':
-            ind_list = ast.literal_eval(input_col)
-            lista_num_col = ind_list
+        lista_num_col = lista_colonne[i]
+        # decommentare sotto se si vuole chiedere in input il numero di colonne
+        # lista_num_col = []
+        # input_col = input(
+        #     "Selezionare le colonne di " + file + ":\n Inserire 'all' se si vogliono tutte le colonne, oppure una "
+        #                                           "lista con gli indici delle relative colonne\n")
+        # if input_col != 'all':
+        #     ind_list = ast.literal_eval(input_col)
+        #     lista_num_col = ind_list
         model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)

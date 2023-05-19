@@ -1,13 +1,12 @@
-from model.isoline_info import IsolineInfo
+from model.faults_shp import FaultsShp
 
 
-def model_to_tuple_iso_info(model: IsolineInfo):
+def model_to_tuple_faults_shp(model: FaultsShp):
     return (str(model.get_id()),
-            str(model.get_isoline_id()),
-            str(model.get_iso_value()),
+            model.get_fault_id(),
             str(model.get_x()),
             str(model.get_y()),
-            str(model.get_isobata_id()),
+            model.get_local_name(),
             str(model.get_vertex_index()),
             str(model.get_vertex_part()),
             str(model.get_vertex_part_index()),
@@ -15,26 +14,26 @@ def model_to_tuple_iso_info(model: IsolineInfo):
             str(model.get_angle()))
 
 
-class IsolineInfoRepo:
-    insert_query = """ INSERT INTO "IsolineInfo"  (
+class FaultsShpRepo:
+    insert_query = """ INSERT INTO "FaultsShp"  (
     "id",
-    "isoline",
-    "isoValue",
+    "faultId",
     "x",
     "y",
-    "idIsobata",
+    "localName",
     "vertexIndex",
     "vertexPart",
     "vertexPartIndex",
     "distance",
-    "angle") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    "angle") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection
 
-    def populate_isoline_info(self, models):
+    def populate_faults_shp(self, models):
         cursor = self.connection.cursor()
         for i in models:
-            values = model_to_tuple_iso_info(i)
+            values = model_to_tuple_faults_shp(i)
             cursor.execute(self.insert_query, values)
         self.connection.commit()
+

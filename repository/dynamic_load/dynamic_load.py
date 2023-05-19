@@ -1,10 +1,13 @@
 from dto.boundary_dto import BoundaryDto
 from dto.boundary_info_dto import BoundaryInfoDto
 from dto.composition_part_dto import CompositionPartDto
+from dto.faults_dto import FaultsDto
+from dto.faults_shp_dto import FaultsShpDto
 from dto.geologic_unit_dto import GeologicUnitDto
 from dto.geological_event_dto import GeologicalEventDto
 from dto.isoline_dto import IsolineDto
 from dto.isoline_info_dto import IsolineInfoDto
+
 
 from repository.reader.csv_reader import CSVReader
 import openpyxl
