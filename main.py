@@ -1,45 +1,24 @@
-import ast
-import cmd
 import logging
-import os
 
-from dto.boundary_info_dto import BoundaryInfoDto
-from dto.faults_dto import FaultsDto
-from dto.isoline_dto import IsolineDto
-from mapper.boundary_info_mapper import BoundaryInfoMapper
-from mapper.boundary_mapper import BoundaryMapper
-from mapper.composition_part_mapper import CompositionPartMapper
-from mapper.faults_mapper import FaultsMapper
-from mapper.geologic_unit_mapper import GeologicUnitMapper
-from mapper.geological_event_mapper import GeologicalEventMapper
-from mapper.isoline_info_mapper import IsolineInfoMapper
-from mapper.isoline_mapper import IsolineMapper
-from model.boundary_info import BoundaryInfo
+from model.boundary import Boundary
 from repository.connection.connection import Connection, close_connection
-from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema
-from repository.dao.boundary_info_repository import BoundaryInfoRepo
-from repository.dao.boundary_repository import BoundaryRepo
-from repository.dao.composition_part_repository import CompositionPartRepo
-from repository.dao.faults_repository import FaultsRepo
-from repository.dao.geologic_unit_repository import GeologicUnitRepo
-from repository.dao.geological_event_repository import GeologicalEventRepo
-from repository.dao.isoline_info_repository import IsolineInfoRepo
-from repository.dao.isoline_repository import IsolineRepo
 from repository.dynamic_load.dynamic_load import DynamicLoad
-from repository.reader.csv_reader import CSVReader
-
-import pandas
-
 from utility.format_convert import table_to_xml
 
 
 def main():
     dynamic_load = DynamicLoad()
     # csv1 = CSVReader()
-    # csv1.load_excel(r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\tabelle\Isoline.xlsx")
-    # a = csv1.data.iloc [:, [1,3]]
-    # print(csv1.data)
-    # print(a)
+    # csv1.load_excel(r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\Isoline\estrazione dati "
+    #                 r"qgis\faults_xy_ex.xlsx")
+    # a = csv1.data.iloc[[1,2,3,4], :]
+    # print (a)
+    # nomi_col= list(a)
+    # elemento = csv1.data[nomi_col[9]][1]
+    # print("elemento nella tabella: " + str(elemento))
+    # nuovo_elemento = parse_method_element(elemento)
+    # print ("elemento dopo la trasformazione: " + str(nuovo_elemento))
+
 
     opened_connection = Connection()
 
@@ -66,23 +45,21 @@ def main():
     # r"ISPRA\Test_Dataset_PoBasin\dati_geologici_database\geochronologicEra1.xlsx"]
 
     lista_colonne_excel = [[], [], [], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [0, 1, 2, 3, 4, 6, 8, 9, 10, 11],
-                           [5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]]
+                           [5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25], [0, 1, 2, 3, 4, 6, 7, 8, 9, 10]]
     name_models = ['GeologicUnit', 'Boundary', 'BoundaryInfo', 'CompositionPart',
-                   'GeologicalEvent', 'Isoline', 'IsolineInfo']
+                   'GeologicalEvent', 'Isoline', 'IsolineInfo', ' Faults', 'FaultsShp']
 
-    tabled = dynamic_load.to_dto(
-        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\Isoline\estrazione dati "
-        r"qgis\faults_shp_riassunto.xlsx", "FaultsDto", [5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-                                                       23, 24, 25])
-    # print(tabled)
-    # faults_mapper = FaultsMapper()
-    # models = faults_mapper.to_model_list_faults(tabled)
-    # print(models)
-    # faults_repo = FaultsRepo(opened_connection.connection)
-    # faults_repo.populate_faults(models)
+    # tabled = dynamic_load.to_dto(
+    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\Isoline\estrazione dati "
+    #     r"qgis\faults_xy_ex.xlsx", "FaultsShpDto", [0, 1, 2, 3, 4, 6, 7, 8, 9, 10])
+    # # print(tabled)
+    # faults_mapper = FaultsShpMapper()
+    # models = faults_mapper.to_model_list_faults_shp(tabled)
+    # # print(models)
+    # faults_repo = FaultsShpRepo(opened_connection.connection)
+    # faults_repo.populate_faults_shp(models)
 
-    table_to_xml('''public."Boundary"''', opened_connection.connection)
-
+    table_to_xml("Boundary", "public", opened_connection.connection)
 
     # mapper_cycle(opened_connection.connection, lista_colonne_excel)
 

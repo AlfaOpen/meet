@@ -29,6 +29,11 @@ from repository.dao.geological_event_repository import GeologicalEventRepo
 
 
 class BoostrapSchema:
+    """Docstring della classe.
+    
+    In Boostrap Schema è definito l'attributo "table_list", una lista appunto contenente delle funzioni, 
+     ognuna delle quali contiene la query per la creazione della relativa tabella.
+     """
 
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
@@ -204,7 +209,7 @@ def faults():
     "dipDirect" varchar,
     "evalMeth"  varchar,
     "observMeth" varchar,
-    "fid" integer,
+    "fid" integer unique ,
     "faultSys" varchar,
     "faultType" varchar,
     "length" integer,
@@ -232,19 +237,19 @@ def faults_shp():
     table_faults_shp = '''CREATE TABLE IF NOT EXISTS public."FaultsShp"
     (
     "id" integer NOT NULL,
-    "faultId" varchar,
+    "faultId" integer,
     "x" float,
     "y" float,
     "localName" varchar,
-    "vertexIndex" integer,
-    "vertexPart" integer,
-    "vertexPartIndex" integer,
-    "distance" float,
-    "angle" float,
+    "vertexIndex" text,
+    "vertexPart" text,
+    "vertexPartIndex" text,
+    "distance" text,
+    "angle" text,
 
     CONSTRAINT "FaultsShp_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsShp_Faults_fkey" FOREIGN KEY ("faultId")
-        REFERENCES public."Faults" ("id") MATCH SIMPLE
+        REFERENCES public."Faults" ("fid") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -281,6 +286,9 @@ def faults_all_3d():
 # uscita del mapper fa da solo il repository con le insert
 
 def mapper_cycle(connection, lista_colonne):
+    """ Definizione della funzione mappercycle.
+
+    """
     excel_list = os.listdir(
         r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
     dynamic_load = DynamicLoad()

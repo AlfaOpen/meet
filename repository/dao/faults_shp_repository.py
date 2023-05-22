@@ -3,7 +3,7 @@ from model.faults_shp import FaultsShp
 
 def model_to_tuple_faults_shp(model: FaultsShp):
     return (str(model.get_id()),
-            model.get_fault_id(),
+            str(model.get_fault_id()),
             str(model.get_x()),
             str(model.get_y()),
             model.get_local_name(),

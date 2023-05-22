@@ -12,7 +12,7 @@ from dto.isoline_info_dto import IsolineInfoDto
 from repository.reader.csv_reader import CSVReader
 import openpyxl
 
-from utility.parser import parse_method_name
+from utility.parser import parse_method_name, parse_method_element
 
 
 class DynamicLoad:
@@ -32,13 +32,17 @@ class DynamicLoad:
         for i in range(0, csv.nrows):
             istanza = globals()[file_dto]()  # inizializzo un'istanza della classe file_dto, in particolare una
             # diversa per ogni riga, quindi scorrendo nel ciclo riempio tutte le righe
-            riga = csv.data[csv.data.index == i]
             k = 0
             while k < len(nomi_col):
                 str_par = parse_method_name(nomi_col[k])
                 metodo_par = "set_" + str_par
                 metodo = getattr(istanza, metodo_par)
-                metodo(csv.data[nomi_col[k]][i])
+                elemento = csv.data[nomi_col[k]][i]
+                if type(elemento) is not str:
+                    nuovo_elemento = parse_method_element(elemento)
+                else:
+                    nuovo_elemento = elemento
+                metodo(nuovo_elemento)
                 k += 1
             tabella.append(istanza)
         return tabella
