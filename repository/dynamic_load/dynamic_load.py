@@ -1,12 +1,14 @@
 from dto.boundary_dto import BoundaryDto
 from dto.boundary_info_dto import BoundaryInfoDto
 from dto.composition_part_dto import CompositionPartDto
+from dto.faults_all_3d_dto import FaultsAll3dDto
 from dto.faults_dto import FaultsDto
 from dto.faults_shp_dto import FaultsShpDto
 from dto.geologic_unit_dto import GeologicUnitDto
 from dto.geological_event_dto import GeologicalEventDto
 from dto.isoline_dto import IsolineDto
 from dto.isoline_info_dto import IsolineInfoDto
+
 
 
 from repository.reader.csv_reader import CSVReader
@@ -38,11 +40,11 @@ class DynamicLoad:
                 metodo_par = "set_" + str_par
                 metodo = getattr(istanza, metodo_par)
                 elemento = csv.data[nomi_col[k]][i]
-                if type(elemento) is not str:
-                    nuovo_elemento = parse_method_element(elemento)
-                else:
-                    nuovo_elemento = elemento
-                metodo(nuovo_elemento)
+                # if type(elemento) is not str:
+                #     nuovo_elemento = parse_method_element(elemento)
+                # else:
+                #     nuovo_elemento = elemento
+                metodo(elemento)
                 k += 1
             tabella.append(istanza)
         return tabella

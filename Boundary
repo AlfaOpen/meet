@@ -1,81 +1,39 @@
 <?xml version="1.0" ?>
 <Boundary>
-  <row>
+  <row1>
     <idBoundary>1</idBoundary>
-    <idBoundary>1</idBoundary>
-  </row>
     <name>PL_u</name>
-    <name>PL_u</name>
-  </row>
     <contactType>unconformable base contact</contactType>
-    <contactType>unconformable base contact</contactType>
-  </row>
     <geounit>2</geounit>
-    <geounit>2</geounit>
-  </row>
-  <row>
+  </row1>
+  <row2>
     <idBoundary>2</idBoundary>
-    <idBoundary>2</idBoundary>
-  </row>
     <name>QM_u</name>
-    <name>QM_u</name>
-  </row>
     <contactType>unconformable base contact</contactType>
-    <contactType>unconformable base contact</contactType>
-  </row>
     <geounit>1</geounit>
-    <geounit>1</geounit>
-  </row>
-  <row>
+  </row2>
+  <row3>
     <idBoundary>3</idBoundary>
-    <idBoundary>3</idBoundary>
-  </row>
     <name>TE_u_east</name>
-    <name>TE_u_east</name>
-  </row>
     <contactType>unconformable top contact</contactType>
-    <contactType>unconformable top contact</contactType>
-  </row>
     <geounit>3</geounit>
-    <geounit>3</geounit>
-  </row>
-  <row>
+  </row3>
+  <row4>
     <idBoundary>4</idBoundary>
-    <idBoundary>4</idBoundary>
-  </row>
     <name>TE_u_west</name>
-    <name>TE_u_west</name>
-  </row>
     <contactType>unconformable top contact</contactType>
-    <contactType>unconformable top contact</contactType>
-  </row>
     <geounit>3</geounit>
-    <geounit>3</geounit>
-  </row>
-  <row>
+  </row4>
+  <row5>
     <idBoundary>5</idBoundary>
-    <idBoundary>5</idBoundary>
-  </row>
     <name>top_Carb_east</name>
-    <name>top_Carb_east</name>
-  </row>
     <contactType>lithogenetic top contact</contactType>
-    <contactType>lithogenetic top contact</contactType>
-  </row>
     <geounit>4</geounit>
-    <geounit>4</geounit>
-  </row>
-  <row>
+  </row5>
+  <row6>
     <idBoundary>6</idBoundary>
-    <idBoundary>6</idBoundary>
-  </row>
     <name>top_Carb_west</name>
-    <name>top_Carb_west</name>
-  </row>
     <contactType>lithogenetic top contact</contactType>
-    <contactType>lithogenetic top contact</contactType>
-  </row>
     <geounit>4</geounit>
-    <geounit>4</geounit>
-  </row>
-<Boundary>
+  </row6>
+</Boundary>

@@ -1,7 +1,7 @@
 from model.faults_all_3d import FaultsAll3d
 
 
-class Faultsall3dMapper:
+class FaultsAll3dMapper:
 
     def to_model(self, faults_all_3d_dto):
         faults_all_3d = FaultsAll3d()

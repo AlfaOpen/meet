@@ -26,5 +26,6 @@ class FaultsAll3dRepo:
         cursor = self.connection.cursor()
         for i in models:
             values = model_to_tuple_faults_all_3d(i)
+            print (type(values))
             cursor.execute(self.insert_query, values)
         self.connection.commit()
