@@ -1,9 +1,9 @@
-from model.faults_all_3d import FaultsAll3d
+from model.faults_all3d import FaultsAll3d
 
 
-def model_to_tuple_faults_all_3d(model: FaultsAll3d):
+def model_to_tuple_faults_all3d(model: FaultsAll3d):
     return (str(model.get_id()),
-            str(model.get_fault_id()),
+            (model.get_fault_id()),
             str(model.get_x()),
             str(model.get_y()),
             str(model.get_depth()),
@@ -22,10 +22,9 @@ class FaultsAll3dRepo:
     def __init__(self, connection):
         self.connection = connection
 
-    def populate_faults_all_3d(self, models):
+    def populate_faults_all3d(self, models):
         cursor = self.connection.cursor()
         for i in models:
-            values = model_to_tuple_faults_all_3d(i)
-            print (type(values))
+            values = model_to_tuple_faults_all3d(i)
             cursor.execute(self.insert_query, values)
         self.connection.commit()

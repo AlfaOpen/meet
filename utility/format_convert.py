@@ -2,7 +2,7 @@ from model.boundary import Boundary
 from model.boundary_info import BoundaryInfo
 from model.composition_part import CompositionPart
 from model.faults import Faults
-from model.faults_all_3d import FaultsAll3d
+from model.faults_all3d import FaultsAll3d
 from model.faults_shp import FaultsShp
 from model.geologic_unit import GeologicUnit
 from model.geological_event import GeologicalEvent
@@ -31,7 +31,7 @@ def table_to_xml(tablename, tableschema, connection):
         print(len(column_list))
 
     # cursor.execute("select * from  %s" % tablename)
-    cursor.execute('''select * from public."BoundaryInfo"''')
+    cursor.execute('''select * from public."FaultsAll3d"''')
     rows = cursor.fetchall()
     print(rows)
 

@@ -12,7 +12,7 @@ def parse_method_name(method_name: str):
         elif i != 0 and 65 <= ord(method_name[i]) <= 90 and 65 <= ord(method_name[i - 1]) <= 90:  # condizione aggiunta
             # affinchè ID me lo scriva "id"
             new_method_name.append(method_name[i].lower())
-        elif i != 0 and (65 <= ord(method_name[i]) <= 90 or 48 <= ord(method_name[i]) <= 57):
+        elif i != 0 and 65 <= ord(method_name[i]) <= 90:
             new_method_name.append('_')
             new_method_name.append(method_name[i].lower())
         else:
@@ -24,9 +24,12 @@ def parse_method_name(method_name: str):
 
 
 def parse_method_element(element):
-    # verifica = numpy.isnan(element)
+    verifica = numpy.isnan(element)
     if element is None:
         output = "NaN"
+    if verifica:
+        output = None
     else:
-        output = element
+        # output = int(element)  # DA COMMENTARE PER I DATI DELLE UNIT - perchè id in faults è int invece il fault_id nelle altre tabelle lo legge come float, ma se provo a fare int(None) mi da errore quindi lo metto nell'else
+        output = element  # DA COMMENTARE QUANDO SI CARICANO I DATI DELLE FAGLIE
     return output

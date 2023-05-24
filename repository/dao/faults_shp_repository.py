@@ -3,15 +3,15 @@ from model.faults_shp import FaultsShp
 
 def model_to_tuple_faults_shp(model: FaultsShp):
     return (str(model.get_id()),
-            str(model.get_fault_id()),
+            model.get_fault_id(),
             str(model.get_x()),
             str(model.get_y()),
             model.get_local_name(),
-            str(model.get_vertex_index()),
-            str(model.get_vertex_part()),
-            str(model.get_vertex_part_index()),
-            str(model.get_distance()),
-            str(model.get_angle()))
+            (model.get_vertex_index()),
+            (model.get_vertex_part()),
+            (model.get_vertex_part_index()),
+            (model.get_distance()),
+            (model.get_angle()))
 
 
 class FaultsShpRepo:

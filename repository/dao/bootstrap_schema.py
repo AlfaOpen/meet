@@ -2,14 +2,14 @@ import ast
 import os
 
 from dto.isoline_info_dto import IsolineInfoDto
-from mapper.faults_all_3d_mapper import FaultsAll3dMapper
+from mapper.faults_all3d_mapper import FaultsAll3dMapper
 from mapper.faults_mapper import FaultsMapper
 from mapper.faults_shp_mapper import FaultsShpMapper
 from mapper.isoline_info_mapper import IsolineInfoMapper
 from mapper.isoline_mapper import IsolineMapper
 from model.isoline import Isoline
 from model.isoline_info import IsolineInfo
-from repository.dao.faults_all_3d_repository import FaultsAll3dRepo
+from repository.dao.faults_all3d_repository import FaultsAll3dRepo
 from repository.dao.faults_repository import FaultsRepo
 from repository.dao.faults_shp_repository import FaultsShpRepo
 from repository.dao.isoline_info_repository import IsolineInfoRepo
@@ -215,7 +215,7 @@ def faults():
     "dipDirect" varchar,
     "evalMeth"  varchar,
     "observMeth" varchar,
-    "fid" float unique ,
+    "fid" varchar unique ,
     "faultSys" varchar,
     "faultType" varchar,
     "length" integer,
@@ -243,7 +243,7 @@ def faults_shp():
     table_faults_shp = '''CREATE TABLE IF NOT EXISTS public."FaultsShp"
     (
     "id" integer NOT NULL,
-    "faultId" float,
+    "faultId" varchar,
     "x" float,
     "y" float,
     "localName" varchar,
@@ -270,7 +270,7 @@ def faults_all_3d():
     table_faults_all_3d = '''CREATE TABLE IF NOT EXISTS public."FaultsAll3d"
     (
     "id" integer NOT NULL,
-    "faultId" float,
+    "faultId" varchar, 
     "x" float,
     "y" float,
     "depth" float,
@@ -278,7 +278,7 @@ def faults_all_3d():
 
     CONSTRAINT "FaultsAll3d_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsAll3d_Faults_fkey" FOREIGN KEY ("faultId")
-        REFERENCES public."Faults" ("fid") MATCH SIMPLE
+        REFERENCES public."Faults" ("fid") MATCH SIMPLE 
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -296,7 +296,7 @@ def mapper_cycle(connection, lista_colonne):
 
     """
     excel_list = os.listdir(
-        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database_faglie")
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
     dynamic_load = DynamicLoad()
     for i in range(0, len(excel_list)):
         item = excel_list[i]
@@ -305,8 +305,7 @@ def mapper_cycle(connection, lista_colonne):
             break
     for i in range(0, len(excel_list)):
         file = excel_list[i]
-        print(file)
-        path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database_faglie\\" + file
+        path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
         lista_num_col = lista_colonne[i]
         # decommentare sotto se si vuole chiedere in input il numero di colonne
         # lista_num_col = []
@@ -318,7 +317,6 @@ def mapper_cycle(connection, lista_colonne):
         #     lista_num_col = ind_list
         model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
-        print(file_dto)
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
         file_mapper = globals()[model_class_str + "Mapper"]()
         str_par1 = parse_method_name(model_class_str)
