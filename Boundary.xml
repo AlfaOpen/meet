@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<Boundary>
+  <row1>
+    <idBoundary>1</idBoundary>
+    <name>PL_u</name>
+    <contactType>unconformable base contact</contactType>
+    <geounit>2</geounit>
+  </row1>
+  <row2>
+    <idBoundary>2</idBoundary>
+    <name>QM_u</name>
+    <contactType>unconformable base contact</contactType>
+    <geounit>1</geounit>
+  </row2>
+  <row3>
+    <idBoundary>3</idBoundary>
+    <name>TE_u_east</name>
+    <contactType>unconformable top contact</contactType>
+    <geounit>3</geounit>
+  </row3>
+  <row4>
+    <idBoundary>4</idBoundary>
+    <name>TE_u_west</name>
+    <contactType>unconformable top contact</contactType>
+    <geounit>3</geounit>
+  </row4>
+  <row5>
+    <idBoundary>5</idBoundary>
+    <name>top_Carb_east</name>
+    <contactType>lithogenetic top contact</contactType>
+    <geounit>4</geounit>
+  </row5>
+  <row6>
+    <idBoundary>6</idBoundary>
+    <name>top_Carb_west</name>
+    <contactType>lithogenetic top contact</contactType>
+    <geounit>4</geounit>
+  </row6>
+</Boundary>

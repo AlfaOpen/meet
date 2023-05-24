@@ -64,7 +64,7 @@ def main():
                    'GeologicalEvent', 'Isoline', 'IsolineInfo']
 
     # tabled = dynamic_load.to_dto(
-    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database_faglie\FaultsAll3d.xlsx", "FaultsAll3dDto", [])
+    #     r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database_faglie\FaultsShp.xlsx", "FaultsShpDto", [])
     # print(tabled)
     # faults_mapper = IsolineInfoMapper()
     # models = faults_mapper.to_model_list_isoline_info(tabled)
@@ -74,7 +74,7 @@ def main():
 
     # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
 
-
+    print()
 
     close_connection(opened_connection.connection)
 

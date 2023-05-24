@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<GeologicalEvent>
+  <row1>
+    <idEra>101</idEra>
+    <geounit>1</geounit>
+    <olderNamedAge>Calabrian</olderNamedAge>
+    <YoungerNamedAge>Holocene</YoungerNamedAge>
+  </row1>
+  <row2>
+    <idEra>102</idEra>
+    <geounit>2</geounit>
+    <olderNamedAge>Zanclean</olderNamedAge>
+    <YoungerNamedAge>Gelasian</YoungerNamedAge>
+  </row2>
+  <row3>
+    <idEra>103</idEra>
+    <geounit>3</geounit>
+    <olderNamedAge>Norian</olderNamedAge>
+    <YoungerNamedAge>Eocene</YoungerNamedAge>
+  </row3>
+  <row4>
+    <idEra>104</idEra>
+    <geounit>4</geounit>
+    <olderNamedAge>Carnian</olderNamedAge>
+    <YoungerNamedAge>Permian</YoungerNamedAge>
+  </row4>
+</GeologicalEvent>

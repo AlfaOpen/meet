@@ -4,11 +4,11 @@
    contain the root `toctree` directive.
 
 Welcome to ISPRA PROJECT's documentation!
-==================================
+=========================================
 
 
-**ISPRA Project** è un progetto che intende *sistemare* e riorganizzare secondo standard definiti alcuni dati geologici
-forniti da ISPRA. In particolare, una parte di questi dati è relativa ad alcune unità geologiche. mentra la restante parte
+**ISPRA Project** è un progetto che intende *sistemare* e riorganizzare secondo alcuni standard europei definiti alcuni dati geologici
+forniti da ISPRA. In particolare, una parte di questi dati è relativa ad alcune unità geologiche. mentre la restante parte
 riguarda le faglie.
 
 .. note::

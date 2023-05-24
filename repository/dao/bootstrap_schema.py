@@ -215,7 +215,7 @@ def faults():
     "dipDirect" varchar,
     "evalMeth"  varchar,
     "observMeth" varchar,
-    "fid" varchar unique ,
+    "fid" int8 unique ,
     "faultSys" varchar,
     "faultType" varchar,
     "length" integer,
@@ -243,7 +243,7 @@ def faults_shp():
     table_faults_shp = '''CREATE TABLE IF NOT EXISTS public."FaultsShp"
     (
     "id" integer NOT NULL,
-    "faultId" varchar,
+    "faultId" int8,
     "x" float,
     "y" float,
     "localName" varchar,
@@ -270,7 +270,7 @@ def faults_all_3d():
     table_faults_all_3d = '''CREATE TABLE IF NOT EXISTS public."FaultsAll3d"
     (
     "id" integer NOT NULL,
-    "faultId" varchar, 
+    "faultId" int8, 
     "x" float,
     "y" float,
     "depth" float,

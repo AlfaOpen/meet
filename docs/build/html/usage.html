@@ -13,8 +13,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="src" href="modules.html" />
-    <link rel="prev" title="Welcome to Prova2’s documentation!" href="index.html" />
+    <link rel="prev" title="Welcome to ISPRA PROJECT’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,22 +32,47 @@
             
   <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
-<p>To use prova2, first install it using pip:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(.venv)</span> <span class="gp">$ </span>pip<span class="w"> </span>install
-</pre></div>
-</div>
-</section>
-<section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h2>
-<p>you can use the <code class="docutils literal notranslate"><span class="pre">BoostrapSchema()</span></code> class:</p>
+<p>caricamento dati (csv reader e dynamic_load)
+Mapping to models
+Metodi di Insert
+Conversione in xml</p>
+<section id="connessione-e-creazione-delle-tabelle">
+<h2>Connessione e Creazione delle tabelle<a class="headerlink" href="#connessione-e-creazione-delle-tabelle" title="Permalink to this heading">¶</a></h2>
+<p>Si può utilizzare la classe <code class="docutils literal notranslate"><span class="pre">Connection()</span></code> e i relativi metodi per effettuare la connessione.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Connection" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Attribute<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">connection</span></code>, richiama una funzione che apre la connessione al database postgres.</p>
+</dd>
+<dt class="field-even">Classmethod<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">check_connection()</span></code>, verifica appunto la connessione.</p>
+</dd>
+</dl>
+<p>La connessione può essere chiusa mediante <code class="docutils literal notranslate"><span class="pre">close_connection()</span></code> fornendogli in ingresso la connessione.</p>
+</dd></dl>
+
+<p>Nella classe <code class="docutils literal notranslate"><span class="pre">BoostrapSchema</span></code> vengono definite le query per la creazione delle tabelle.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="BoostrapSchema">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BoostrapSchema</span></span><a class="headerlink" href="#BoostrapSchema" title="Permalink to this definition">¶</a></dt>
-<dd><p>questa classe ha come attributo una lista, la quale contiene le query per la creazione delle tabelle del database.</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Attribute<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">table_list</span></code>, una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.</p>
+</dd>
+<dt class="field-even">Classmethod<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">execute_query()</span></code> prende in ingresso la connessione ed esegue la query per ogni tabella all’interno della lista.</p>
+</dd>
+<dt class="field-odd">Classmethod<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">commit_query()</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -72,19 +96,17 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connessione-e-creazione-delle-tabelle">Connessione e Creazione delle tabelle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">src</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Prova2’s documentation!</a></li>
-      <li>Next: <a href="modules.html" title="next chapter">src</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to ISPRA PROJECT’s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
