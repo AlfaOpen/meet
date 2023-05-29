@@ -60,12 +60,12 @@ class BoostrapSchema:
 def geologic_unit():
     table_geologic_unit = '''CREATE TABLE IF NOT EXISTS public."GeologicUnit"
     (
-    "idGeoUnit" varchar NOT NULL,
+    "inspireId" varchar NOT NULL,
     "name" varchar,
     "description" varchar,
     "refGeoUnit" varchar,
     "geologicUnitType" varchar,
-    CONSTRAINT "GeologicUnit_pkey" PRIMARY KEY ("idGeoUnit")
+    CONSTRAINT "GeologicUnit_pkey" PRIMARY KEY ("inspireId")
     )
     TABLESPACE pg_default;
     ALTER TABLE IF EXISTS public."GeologicUnit"
@@ -83,7 +83,7 @@ def boundary():
     geoUnit varchar,
     CONSTRAINT "Boundary_pkey" PRIMARY KEY ("idBoundary"),
     CONSTRAINT geoUnit FOREIGN KEY (geoUnit)
-        REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
+        REFERENCES public."GeologicUnit" ("inspireId") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -127,7 +127,7 @@ def composition_part():
     "Role2" varchar,
     CONSTRAINT "CompositionPart_pkey" PRIMARY KEY ("idPart"),
     CONSTRAINT "CompositionPart_geoUnit_fkey" FOREIGN KEY (geoUnit)
-        REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
+        REFERENCES public."GeologicUnit" ("inspireId") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -147,7 +147,7 @@ def geological_event():
     "YoungerNamedAge" varchar,
     CONSTRAINT "GeologicalEvent_pkey" PRIMARY KEY ("idEra"),
     CONSTRAINT "GeologicalEvent_geoUnit_fkey" FOREIGN KEY (geoUnit)
-        REFERENCES public."GeologicUnit" ("idGeoUnit") MATCH SIMPLE
+        REFERENCES public."GeologicUnit" ("inspireId") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -332,8 +332,10 @@ def mapper_cycle(connection, lista_colonne):
 
 def clear_schema(connection):
     drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", 
-    public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d"'''
+    public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit"'''
     cursor = connection.cursor()
     cursor.execute(drop_query)
     connection.commit()
     print('Tutte le tabelle sono state eliminate')
+
+# public."Faults", public."FaultsShp", public."FaultsAll3d"

@@ -11,7 +11,7 @@ def model_to_tuple_geo(model: GeologicUnit):
 
 class GeologicUnitRepo:
     insert_query = """ INSERT INTO "GeologicUnit"  (
-    "idGeoUnit",
+    "inspireId",
     "name",
     "description",
     "refGeoUnit",

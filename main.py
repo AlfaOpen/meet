@@ -18,17 +18,17 @@ def main():
     if not Connection.check_connection(opened_connection.connection):
         return logging.info("Error in connection")
 
-    # clear_schema(opened_connection.connection)
-    #
-    # boostrap_schema = BoostrapSchema()
-    # boostrap_schema.execute_query(opened_connection.connection)
-    # boostrap_schema.commit_query(opened_connection.connection)
+    clear_schema(opened_connection.connection)
+
+    boostrap_schema = BoostrapSchema()
+    boostrap_schema.execute_query(opened_connection.connection)
+    boostrap_schema.commit_query(opened_connection.connection)
     #
     lista_faglie = [[5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25], [],
                     [0, 1, 2, 3, 4, 6, 7, 8, 9, 10]]
     lista_colonne_excel = [[], [], [], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12]]
 
-    # mapper_cycle(opened_connection.connection, lista_colonne_excel)
+    mapper_cycle(opened_connection.connection, lista_colonne_excel)
     # DIFFERENZE TRA CARICAMENTO UNIT E FAGLIE: cambiare la lista nel mapper, cambiare i due percorsi all'interno
     # della funzione mapper
 
