@@ -1,12 +1,6 @@
 Usage
 =====
 
-.. connection, struttura tabelle e relativa creazione (BoostrapSchema)
-caricamento dati (csv reader e dynamic_load)
-Mapping to models
-Metodi di Insert
-Conversione in xml
-
 Connessione e Creazione delle tabelle
 -------------------------------------
 
@@ -14,24 +8,105 @@ Si può utilizzare la classe ``Connection()`` e i relativi metodi per effettuare
 
 .. py:class:: Connection(connection)
 
-
     :attribute: ``connection``, richiama una funzione che apre la connessione al database postgres.
 
-    :classmethod: ``check_connection()``, verifica appunto la connessione.
+    .. py:classmethod:: check_connection()
+        verifica appunto la connessione.
 
     La connessione può essere chiusa mediante ``close_connection()`` fornendogli in ingresso la connessione.
 
 Nella classe ``BoostrapSchema`` vengono definite le query per la creazione delle tabelle.
 
-.. py:class:: BoostrapSchema()
+.. py:class:: BoostrapSchema(table_list)
 
     :attribute: ``table_list``, una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.
 
-    :classmethod: ``execute_query()`` prende in ingresso la connessione ed esegue la query per ogni tabella all'interno della lista.
+    .. py:classmethod:: execute_query
+        prende in ingresso la connessione ed esegue la query per ogni tabella all'interno della lista.
 
-    :classmethod: ``commit_query()``
+    .. py:classmethod:: commit_query
 
-Functions
+Caricamento Dati
 ---------
+
+La classe ``CSV Reader`` può essere utilizzata per leggere gli excel.
+
+.. py:class:: CSVReader (data,nrows,column_data)
+
+    :data: viene restituito dal metodo ``load_excel``
+
+    :nrows: viene restituito dal metodo ``num_rows``
+
+    :column_data: viene restituito dal metodo ``retrieve_column``
+
+    .. py:classmethod::
+
+        restituisce la tabella excel fornendogli in ingresso il path
+
+    .. py:classmethod:: num_rows
+
+        restituisce il numero di righe, prendendo in ingresso la tabella
+
+    .. py:classmethod:: retrieve_column
+
+        restituisce solo parte della tabella, quella relativa alle colonne selezionate (prende in ingresso la tabella e una lista di colonne)
+
+
+La classe ``Dynamic Load`` viene utilizzata per caricare in ciascun file dto i dati presi dalle tabelle excel.
+
+.. py:class:: DynamicLoad
+
+    .. py:classmethod:: to_dto
+
+        questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall'excel. Con due cicli for annidati (all'esterno sulle colonne, all'interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.
+
+Più nel dettaglio, i nomi delle colonne degli excel vengono modificate mediante i metodi parser affinchè corrispondano alle funzione di set e get di ciascun dto:
+
+.. py:function:: parse_method_name (method_name)
+
+    prende in ingresso il nome della colonna, e si occupa di mettere il "_" prima di ogni lettera maiuscola all'interno della parola (tranne la prima) e rende tutte le lettere minuscole
+
+.. py:function:: parse_method_element (element)
+
+    si occupa di verificare se ci solo elementi NaN e in caso sotituirli con "None"
+
+Mapping to Models
+------------------
+
+Per ogni tabella del database è stato creato un ``Mapper`` mediante cui i dati vengono trasferiti dal dto al model
+
+.. py:class:: Mapper
+
+    .. py:classmethod:: to_model_list_boundary_info
+
+        prende in ingresso la lista degli oggetti di un dto, e per ogni elemento della lista (ogni oggetto) tutti i campi vengono inseriti nel model mediante il metodo ``to_model``
+
+    .. py:classmethod:: to_model
+
+        prende in ingresso un oggetto del dto e mappa singolarmente ogni campo dal dto al model mediante le funzioni di set e get
+
+
+
+Metodi di Insert
+------------------
+
+I dati così inseriti nei model vengono mappati nel database mediante insert query.
+Questo avviene all'interno dei metodi definiti nella classe ``Repository``
+
+.. py:class:: Repository
+
+    :insert_query: query di insert in cui vengono specificati quali valori inserire in quale tabella
+
+    .. py:classmethod:: populate_model
+
+        prende in ingresso la lista contenente gli oggetti models e in un ciclo for scorro tutti gli elementi, ad uno ad uno ciascun oggetto viene scomposto nei suoi campi mediante il metodo ``model_to_tuple`` che mi da proprio i valori della INSERT; pertanto tutti i valori di un oggetto vengono mappati nel database ad ogni iterazione del ciclo.
+
+
+
+
+
+
+
+
 
 

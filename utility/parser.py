@@ -30,6 +30,5 @@ def parse_method_element(element):
     if verifica:
         output = None
     else:
-        # output = int(element)  # DA COMMENTARE PER I DATI DELLE UNIT - perchè id in faults è int invece il fault_id nelle altre tabelle lo legge come float, ma se provo a fare int(None) mi da errore quindi lo metto nell'else
-        output = element  # DA COMMENTARE QUANDO SI CARICANO I DATI DELLE FAGLIE
+        output = element
     return output
