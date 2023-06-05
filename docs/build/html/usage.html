@@ -39,16 +39,15 @@
 <dt class="sig sig-object py" id="Connection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Connection" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Attribute<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">connection</span></code>, richiama una funzione che apre la connessione al database postgres.</p>
+<dt class="field-odd">Connection<span class="colon">:</span></dt>
+<dd class="field-odd"><p>richiama una funzione che apre la connessione al database postgres.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="Connection.check_connection">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Connection.check_connection" title="Permalink to this definition">¶</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">verifica</span> <span class="pre">appunto</span> <span class="pre">la</span> <span class="pre">connessione.</span></span></dt>
-<dd></dd></dl>
+<dd><p>verifica appunto la connessione.</p>
+</dd></dl>
 
 <p>La connessione può essere chiusa mediante <code class="docutils literal notranslate"><span class="pre">close_connection()</span></code> fornendogli in ingresso la connessione.</p>
 </dd></dl>
@@ -58,16 +57,15 @@
 <dt class="sig sig-object py" id="BoostrapSchema">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BoostrapSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BoostrapSchema" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Attribute<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">table_list</span></code>, una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.</p>
+<dt class="field-odd">Table_list<span class="colon">:</span></dt>
+<dd class="field-odd"><p>una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="BoostrapSchema.execute_query">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BoostrapSchema.execute_query" title="Permalink to this definition">¶</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">prende</span> <span class="pre">in</span> <span class="pre">ingresso</span> <span class="pre">la</span> <span class="pre">connessione</span> <span class="pre">ed</span> <span class="pre">esegue</span> <span class="pre">la</span> <span class="pre">query</span> <span class="pre">per</span> <span class="pre">ogni</span> <span class="pre">tabella</span> <span class="pre">all'interno</span> <span class="pre">della</span> <span class="pre">lista.</span></span></dt>
-<dd></dd></dl>
+<dd><p>prende in ingresso la connessione ed esegue la query per ogni tabella all’interno della lista.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="BoostrapSchema.commit_query">

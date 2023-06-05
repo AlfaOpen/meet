@@ -8,9 +8,10 @@ Si può utilizzare la classe ``Connection()`` e i relativi metodi per effettuare
 
 .. py:class:: Connection(connection)
 
-    :attribute: ``connection``, richiama una funzione che apre la connessione al database postgres.
+    :connection: richiama una funzione che apre la connessione al database postgres.
 
     .. py:classmethod:: check_connection()
+
         verifica appunto la connessione.
 
     La connessione può essere chiusa mediante ``close_connection()`` fornendogli in ingresso la connessione.
@@ -19,9 +20,10 @@ Nella classe ``BoostrapSchema`` vengono definite le query per la creazione delle
 
 .. py:class:: BoostrapSchema(table_list)
 
-    :attribute: ``table_list``, una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.
+    :table_list: una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.
 
     .. py:classmethod:: execute_query
+
         prende in ingresso la connessione ed esegue la query per ogni tabella all'interno della lista.
 
     .. py:classmethod:: commit_query
