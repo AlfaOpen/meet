@@ -93,6 +93,12 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="CSVReader.load_excel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader.load_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>restituisce la tabella excel fornendogli in ingresso il path</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="CSVReader.num_rows">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_rows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader.num_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>restituisce il numero di righe, prendendo in ingresso la tabella</p>
@@ -112,7 +118,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DynamicLoad</span></span><a class="headerlink" href="#DynamicLoad" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="DynamicLoad.to_dto">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#DynamicLoad.to_dto" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_dto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DynamicLoad.to_dto" title="Permalink to this definition">¶</a></dt>
 <dd><p>questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall’excel. Con due cicli for annidati (all’esterno sulle colonne, all’interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.</p>
 </dd></dl>
 
@@ -166,11 +172,35 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="Repository.populate_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Repository.populate_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="Repository.populate_tabella">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_tabella</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Repository.populate_tabella" title="Permalink to this definition">¶</a></dt>
 <dd><p>prende in ingresso la lista contenente gli oggetti models e in un ciclo for scorro tutti gli elementi, ad uno ad uno ciascun oggetto viene scomposto nei suoi campi mediante il metodo <code class="docutils literal notranslate"><span class="pre">model_to_tuple</span></code> che mi da proprio i valori della INSERT; pertanto tutti i valori di un oggetto vengono mappati nel database ad ogni iterazione del ciclo.</p>
 </dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="altre-funzioni">
+<h2>Altre Funzioni<a class="headerlink" href="#altre-funzioni" title="Permalink to this heading">¶</a></h2>
+<p>Una funzione che automatizza tutte le operazioni sopra descritte è il <code class="docutils literal notranslate"><span class="pre">mapper_cycle</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mapper_cycle">
+<span class="sig-name descname"><span class="pre">mapper_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_colonne</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mapper_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso solo la connessione e una lista contenente a sua volta liste con gli indici delle colonne da considerare per ciascun file. In particolare, viene settato di default un path e questa funzione si prende tutti i file excel che trova lì; questi ultimi vengono riordinati (perchè la creazione delle tabelle avviene secondo l’ordine nella lista) e poi singolarmente a questi file vengono applicate le funzioni to_dto, to_model_list e populate_tabella (grazie ad opportune reflection).</p>
+</dd></dl>
+
+<p>Funzione per eliminare le tabelle dal database: <code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">schema</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="clear_schema">
+<span class="sig-name descname"><span class="pre">clear_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit.</p>
+</dd></dl>
+
+<p>Funzione per convertire una tabella in formato XML: <code class="docutils literal notranslate"><span class="pre">table_to_xml</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="table_to_xml">
+<span class="sig-name descname"><span class="pre">table_to_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#table_to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso il nome della tabella, lo schema dove è definita e la connessione; queste informazioni servono per accedere alla specifica tabella nel database e prelevare tutte le informazioni in essa contenute, per poi riadattarle nel formato di output (xml).</p>
 </dd></dl>
 
 </section>
@@ -200,6 +230,7 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <li class="toctree-l2"><a class="reference internal" href="#caricamento-dati">Caricamento Dati</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mapping-to-models">Mapping to Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#metodi-di-insert">Metodi di Insert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#altre-funzioni">Altre Funzioni</a></li>
 </ul>
 </li>
 </ul>

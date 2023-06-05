@@ -41,7 +41,7 @@ La classe ``CSV Reader`` può essere utilizzata per leggere gli excel.
 
     :column_data: viene restituito dal metodo ``retrieve_column``
 
-    .. py:classmethod::
+    .. py:classmethod:: load_excel (path)
 
         restituisce la tabella excel fornendogli in ingresso il path
 
@@ -58,7 +58,7 @@ La classe ``Dynamic Load`` viene utilizzata per caricare in ciascun file dto i d
 
 .. py:class:: DynamicLoad
 
-    .. py:classmethod:: to_dto
+    .. py:classmethod:: to_dto (path, file_dto, index_col)
 
         questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall'excel. Con due cicli for annidati (all'esterno sulle colonne, all'interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.
 
@@ -99,13 +99,30 @@ Questo avviene all'interno dei metodi definiti nella classe ``Repository``
 
     :insert_query: query di insert in cui vengono specificati quali valori inserire in quale tabella
 
-    .. py:classmethod:: populate_model
+    .. py:classmethod:: populate_tabella
 
         prende in ingresso la lista contenente gli oggetti models e in un ciclo for scorro tutti gli elementi, ad uno ad uno ciascun oggetto viene scomposto nei suoi campi mediante il metodo ``model_to_tuple`` che mi da proprio i valori della INSERT; pertanto tutti i valori di un oggetto vengono mappati nel database ad ogni iterazione del ciclo.
 
+Altre Funzioni
+--------------
 
+Una funzione che automatizza tutte le operazioni sopra descritte è il ``mapper_cycle``
 
+.. py:function:: mapper_cycle (connection, lista_colonne)
 
+    Questa funzione prende in ingresso solo la connessione e una lista contenente a sua volta liste con gli indici delle colonne da considerare per ciascun file. In particolare, viene settato di default un path e questa funzione si prende tutti i file excel che trova lì; questi ultimi vengono riordinati (perchè la creazione delle tabelle avviene secondo l'ordine nella lista) e poi singolarmente a questi file vengono applicate le funzioni to_dto, to_model_list e populate_tabella (grazie ad opportune reflection).
+
+Funzione per eliminare le tabelle dal database: ``clear schema``
+
+.. py:function:: clear_schema (connection)
+
+    Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l'eliminazione viene eseguita mediante i comandi di execute e commit.
+
+Funzione per convertire una tabella in formato XML: ``table_to_xml``
+
+.. py:function:: table_to_xml (table, schema, connection)
+
+    Questa funzione prende in ingresso il nome della tabella, lo schema dove è definita e la connessione; queste informazioni servono per accedere alla specifica tabella nel database e prelevare tutte le informazioni in essa contenute, per poi riadattarle nel formato di output (xml).
 
 
 
