@@ -296,7 +296,7 @@ def mapper_cycle(connection, lista_colonne):
 
     """
     excel_list = os.listdir(
-        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database_faglie")
+        r"C:\Users\giuli\OneDrive\Desktop\Progetto ISPRA\Test_Dataset_PoBasin\dati_geologici_database")
     dynamic_load = DynamicLoad()
     for i in range(0, len(excel_list)):
         item = excel_list[i]
@@ -305,7 +305,7 @@ def mapper_cycle(connection, lista_colonne):
             break
     for i in range(0, len(excel_list)):
         file = excel_list[i]
-        path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database_faglie\\" + file
+        path = "C:\\Users\\giuli\\OneDrive\\Desktop\\Progetto ISPRA\\Test_Dataset_PoBasin\\dati_geologici_database\\" + file
         lista_num_col = lista_colonne[i]
         # decommentare sotto se si vuole chiedere in input il numero di colonne
         # lista_num_col = []
