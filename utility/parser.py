@@ -25,8 +25,6 @@ def parse_method_name(method_name: str):
 
 def parse_method_element(element):
     verifica = numpy.isnan(element)
-    if element is None:
-        output = "NaN"
     if verifica:
         output = None
     else:

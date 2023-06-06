@@ -28,8 +28,8 @@ from repository.dao.faults_shp_repository import FaultsShpRepo
 from repository.dao.isoline_info_repository import IsolineInfoRepo
 from repository.dao.isoline_repository import IsolineRepo
 
-def execution_service(connection):
 
+def execution_service(connection):
     dynamic_load = DynamicLoad()
 
     comando = input("Per eliminare tutte le tabelle nel database scrivi 'elimina', altrimenti premi invio\n")
@@ -101,5 +101,3 @@ def execution_service(connection):
     print('Insert effettuate correttamente')
 
     comm_finale = input('Processo completato. \nPremi invio per chiudere la finestra.')
-
-
