@@ -1,6 +1,16 @@
 # HaleModels
 
 
+## Come utilizzare correttamente il codice
+
+Aprire la connessione con postgres inizializzando la classe Connection. 
+Dopodiché potrebbe essere necessario eliminare tutti i dati presenti nel database e ricreare la struttura delle tabelle.
+Per inserire i dati, c'è la funzione mapper_cycle che automatizza l'intero processo: 
+essa prende in ingresso la connessione creata e una lista contenente gli indici delle colonne da considerare per ogni tabella
+(ha quindi tanti elementi quante sono le tabelle). In automatico carica i file excel presenti nel path preimpostato
+e per ognuno di questi carica i dati nel file dto corrispondente, da questi nel model e i valori nel model vengono presi 
+e utilizzati per fare le insert nelle tabelle.
+
 
 ## Getting started
 

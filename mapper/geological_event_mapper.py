@@ -8,3 +8,10 @@ class GeologicalEventMapper:
         geological_event.set_geo_unit(geological_event_dto.get_geo_unit())
         geological_event.set_older_named_age(geological_event_dto.get_older_named_age())
         geological_event.set_younger_named_age(geological_event_dto.get_younger_named_age())
+        return geological_event
+
+    def to_model_list_geological_event(self, list_geological_event_dto: list):
+        model_list = []
+        for dto in list_geological_event_dto:
+            model_list.append(self.to_model(dto))
+        return model_list

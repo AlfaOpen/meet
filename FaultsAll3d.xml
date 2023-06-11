@@ -1,0 +1,643 @@
+<?xml version="1.0" ?>
+<FaultsAll3d>
+  <row1>
+    <id>140240</id>
+    <faultId>1</faultId>
+    <x>586433.0</x>
+    <y>5034905.0</y>
+    <depth>-8170.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row1>
+  <row2>
+    <id>140241</id>
+    <faultId>1</faultId>
+    <x>586631.0</x>
+    <y>5034883.0</y>
+    <depth>-8164.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row2>
+  <row3>
+    <id>140242</id>
+    <faultId>1</faultId>
+    <x>586454.0</x>
+    <y>5035063.0</y>
+    <depth>-8290.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row3>
+  <row4>
+    <id>140243</id>
+    <faultId>1</faultId>
+    <x>586610.0</x>
+    <y>5034727.0</y>
+    <depth>-8040.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row4>
+  <row5>
+    <id>140244</id>
+    <faultId>1</faultId>
+    <x>586809.0</x>
+    <y>5034705.0</y>
+    <depth>-8034.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row5>
+  <row6>
+    <id>140245</id>
+    <faultId>1</faultId>
+    <x>586830.0</x>
+    <y>5034860.0</y>
+    <depth>-8158.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row6>
+  <row7>
+    <id>140246</id>
+    <faultId>1</faultId>
+    <x>587007.0</x>
+    <y>5034681.0</y>
+    <depth>-8030.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row7>
+  <row8>
+    <id>140247</id>
+    <faultId>1</faultId>
+    <x>587028.0</x>
+    <y>5034835.0</y>
+    <depth>-8156.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row8>
+  <row9>
+    <id>140248</id>
+    <faultId>1</faultId>
+    <x>587206.0</x>
+    <y>5034655.0</y>
+    <depth>-8028.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row9>
+  <row10>
+    <id>140249</id>
+    <faultId>1</faultId>
+    <x>587227.0</x>
+    <y>5034809.0</y>
+    <depth>-8154.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row10>
+  <row11>
+    <id>140250</id>
+    <faultId>1</faultId>
+    <x>587425.0</x>
+    <y>5034784.0</y>
+    <depth>-8151.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row11>
+  <row12>
+    <id>140251</id>
+    <faultId>1</faultId>
+    <x>587404.0</x>
+    <y>5034631.0</y>
+    <depth>-8025.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row12>
+  <row13>
+    <id>140252</id>
+    <faultId>1</faultId>
+    <x>587185.0</x>
+    <y>5034502.0</y>
+    <depth>-7901.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row13>
+  <row14>
+    <id>140253</id>
+    <faultId>1</faultId>
+    <x>587383.0</x>
+    <y>5034477.0</y>
+    <depth>-7898.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row14>
+  <row15>
+    <id>140254</id>
+    <faultId>1</faultId>
+    <x>587581.0</x>
+    <y>5034452.0</y>
+    <depth>-7895.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row15>
+  <row16>
+    <id>140255</id>
+    <faultId>1</faultId>
+    <x>587603.0</x>
+    <y>5034606.0</y>
+    <depth>-8022.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row16>
+  <row17>
+    <id>140256</id>
+    <faultId>1</faultId>
+    <x>587780.0</x>
+    <y>5034426.0</y>
+    <depth>-7894.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row17>
+  <row18>
+    <id>140257</id>
+    <faultId>1</faultId>
+    <x>587801.0</x>
+    <y>5034580.0</y>
+    <depth>-8020.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row18>
+  <row19>
+    <id>140258</id>
+    <faultId>1</faultId>
+    <x>587978.0</x>
+    <y>5034397.0</y>
+    <depth>-7897.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row19>
+  <row20>
+    <id>140259</id>
+    <faultId>1</faultId>
+    <x>587999.0</x>
+    <y>5034550.0</y>
+    <depth>-8024.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row20>
+  <row21>
+    <id>140260</id>
+    <faultId>1</faultId>
+    <x>587822.0</x>
+    <y>5034733.0</y>
+    <depth>-8147.0</depth>
+    <localName>Malpaga Thrust</localName>
+</row21>
+  <row22>
+    <id>134075</id>
+    <faultId>111</faultId>
+    <x>556407.0</x>
+    <y>5003634.0</y>
+    <depth>-4001.0</depth>
+    <localName>Cremona Thrust</localName>
+</row22>
+  <row23>
+    <id>134076</id>
+    <faultId>111</faultId>
+    <x>556828.0</x>
+    <y>5003383.0</y>
+    <depth>-4108.0</depth>
+    <localName>Cremona Thrust</localName>
+</row23>
+  <row24>
+    <id>134077</id>
+    <faultId>111</faultId>
+    <x>557242.0</x>
+    <y>5003111.0</y>
+    <depth>-4176.0</depth>
+    <localName>Cremona Thrust</localName>
+</row24>
+  <row25>
+    <id>134078</id>
+    <faultId>111</faultId>
+    <x>557661.0</x>
+    <y>5002855.0</y>
+    <depth>-4274.0</depth>
+    <localName>Cremona Thrust</localName>
+</row25>
+  <row26>
+    <id>134079</id>
+    <faultId>111</faultId>
+    <x>558076.0</x>
+    <y>5002585.0</y>
+    <depth>-4346.0</depth>
+    <localName>Cremona Thrust</localName>
+</row26>
+  <row27>
+    <id>134080</id>
+    <faultId>111</faultId>
+    <x>558484.0</x>
+    <y>5002295.0</y>
+    <depth>-4378.0</depth>
+    <localName>Cremona Thrust</localName>
+</row27>
+  <row28>
+    <id>134081</id>
+    <faultId>111</faultId>
+    <x>558893.0</x>
+    <y>5002005.0</y>
+    <depth>-4412.0</depth>
+    <localName>Cremona Thrust</localName>
+</row28>
+  <row29>
+    <id>134082</id>
+    <faultId>111</faultId>
+    <x>559299.0</x>
+    <y>5001707.0</y>
+    <depth>-4432.0</depth>
+    <localName>Cremona Thrust</localName>
+</row29>
+  <row30>
+    <id>134083</id>
+    <faultId>111</faultId>
+    <x>559707.0</x>
+    <y>5001414.0</y>
+    <depth>-4459.0</depth>
+    <localName>Cremona Thrust</localName>
+</row30>
+  <row31>
+    <id>134084</id>
+    <faultId>111</faultId>
+    <x>560113.0</x>
+    <y>5001118.0</y>
+    <depth>-4481.0</depth>
+    <localName>Cremona Thrust</localName>
+</row31>
+  <row32>
+    <id>134085</id>
+    <faultId>111</faultId>
+    <x>560524.0</x>
+    <y>5000836.0</y>
+    <depth>-4531.0</depth>
+    <localName>Cremona Thrust</localName>
+</row32>
+  <row33>
+    <id>134086</id>
+    <faultId>111</faultId>
+    <x>560940.0</x>
+    <y>5000569.0</y>
+    <depth>-4608.0</depth>
+    <localName>Cremona Thrust</localName>
+</row33>
+  <row34>
+    <id>134087</id>
+    <faultId>111</faultId>
+    <x>561354.0</x>
+    <y>5000298.0</y>
+    <depth>-4677.0</depth>
+    <localName>Cremona Thrust</localName>
+</row34>
+  <row35>
+    <id>134088</id>
+    <faultId>111</faultId>
+    <x>561768.0</x>
+    <y>5000023.0</y>
+    <depth>-4741.0</depth>
+    <localName>Cremona Thrust</localName>
+</row35>
+  <row36>
+    <id>134089</id>
+    <faultId>111</faultId>
+    <x>562177.0</x>
+    <y>4999737.0</y>
+    <depth>-4781.0</depth>
+    <localName>Cremona Thrust</localName>
+</row36>
+  <row37>
+    <id>134090</id>
+    <faultId>111</faultId>
+    <x>562583.0</x>
+    <y>4999437.0</y>
+    <depth>-4796.0</depth>
+    <localName>Cremona Thrust</localName>
+</row37>
+  <row38>
+    <id>134091</id>
+    <faultId>111</faultId>
+    <x>562988.0</x>
+    <y>4999135.0</y>
+    <depth>-4808.0</depth>
+    <localName>Cremona Thrust</localName>
+</row38>
+  <row39>
+    <id>134092</id>
+    <faultId>111</faultId>
+    <x>563393.0</x>
+    <y>4998833.0</y>
+    <depth>-4818.0</depth>
+    <localName>Cremona Thrust</localName>
+</row39>
+  <row40>
+    <id>134093</id>
+    <faultId>111</faultId>
+    <x>563797.0</x>
+    <y>4998530.0</y>
+    <depth>-4828.0</depth>
+    <localName>Cremona Thrust</localName>
+</row40>
+  <row41>
+    <id>134094</id>
+    <faultId>111</faultId>
+    <x>564202.0</x>
+    <y>4998227.0</y>
+    <depth>-4838.0</depth>
+    <localName>Cremona Thrust</localName>
+</row41>
+  <row42>
+    <id>134095</id>
+    <faultId>111</faultId>
+    <x>564609.0</x>
+    <y>4997932.0</y>
+    <depth>-4862.0</depth>
+    <localName>Cremona Thrust</localName>
+</row42>
+  <row43>
+    <id>30588</id>
+    <faultId>150</faultId>
+    <x>656172.0</x>
+    <y>4969806.0</y>
+    <depth>-5087.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row43>
+  <row44>
+    <id>30589</id>
+    <faultId>150</faultId>
+    <x>656150.0</x>
+    <y>4969945.0</y>
+    <depth>-5061.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row44>
+  <row45>
+    <id>30590</id>
+    <faultId>150</faultId>
+    <x>656177.0</x>
+    <y>4969749.0</y>
+    <depth>-5169.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row45>
+  <row46>
+    <id>30591</id>
+    <faultId>150</faultId>
+    <x>656160.0</x>
+    <y>4969829.0</y>
+    <depth>-5226.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row46>
+  <row47>
+    <id>30592</id>
+    <faultId>150</faultId>
+    <x>656132.0</x>
+    <y>4970025.0</y>
+    <depth>-5118.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row47>
+  <row48>
+    <id>30593</id>
+    <faultId>150</faultId>
+    <x>656128.0</x>
+    <y>4970083.0</y>
+    <depth>-5036.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row48>
+  <row49>
+    <id>30594</id>
+    <faultId>150</faultId>
+    <x>656138.0</x>
+    <y>4969968.0</y>
+    <depth>-5200.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row49>
+  <row50>
+    <id>30595</id>
+    <faultId>150</faultId>
+    <x>656116.0</x>
+    <y>4970106.0</y>
+    <depth>-5175.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row50>
+  <row51>
+    <id>30596</id>
+    <faultId>150</faultId>
+    <x>656097.0</x>
+    <y>4970219.0</y>
+    <depth>-5010.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row51>
+  <row52>
+    <id>30597</id>
+    <faultId>150</faultId>
+    <x>656083.0</x>
+    <y>4970241.0</y>
+    <depth>-5149.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row52>
+  <row53>
+    <id>30598</id>
+    <faultId>150</faultId>
+    <x>656181.0</x>
+    <y>4969691.0</y>
+    <depth>-5251.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row53>
+  <row54>
+    <id>30599</id>
+    <faultId>150</faultId>
+    <x>656194.0</x>
+    <y>4969668.0</y>
+    <depth>-5112.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row54>
+  <row55>
+    <id>30600</id>
+    <faultId>150</faultId>
+    <x>656204.0</x>
+    <y>4969553.0</y>
+    <depth>-5276.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row55>
+  <row56>
+    <id>30601</id>
+    <faultId>150</faultId>
+    <x>656202.0</x>
+    <y>4969644.0</y>
+    <depth>-4973.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row56>
+  <row57>
+    <id>30602</id>
+    <faultId>150</faultId>
+    <x>656207.0</x>
+    <y>4969586.0</y>
+    <depth>-5055.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row57>
+  <row58>
+    <id>30603</id>
+    <faultId>150</faultId>
+    <x>656212.0</x>
+    <y>4969621.0</y>
+    <depth>-4834.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row58>
+  <row59>
+    <id>30604</id>
+    <faultId>150</faultId>
+    <x>656219.0</x>
+    <y>4969504.0</y>
+    <depth>-4998.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row59>
+  <row60>
+    <id>30605</id>
+    <faultId>150</faultId>
+    <x>656210.0</x>
+    <y>4969528.0</y>
+    <depth>-5137.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row60>
+  <row61>
+    <id>30606</id>
+    <faultId>150</faultId>
+    <x>656231.0</x>
+    <y>4969422.0</y>
+    <depth>-4941.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row61>
+  <row62>
+    <id>30607</id>
+    <faultId>150</faultId>
+    <x>656234.0</x>
+    <y>4969364.0</y>
+    <depth>-5024.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row62>
+  <row63>
+    <id>30608</id>
+    <faultId>150</faultId>
+    <x>656225.0</x>
+    <y>4969480.0</y>
+    <depth>-4859.0</depth>
+    <localName>Cavone 2 Oblique slip fault</localName>
+</row63>
+  <row64>
+    <id>228872</id>
+    <faultId>None</faultId>
+    <x>582943.0</x>
+    <y>5018261.0</y>
+    <depth>-3555.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row64>
+  <row65>
+    <id>228873</id>
+    <faultId>None</faultId>
+    <x>579341.0</x>
+    <y>5020214.0</y>
+    <depth>-3971.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row65>
+  <row66>
+    <id>228874</id>
+    <faultId>None</faultId>
+    <x>580306.0</x>
+    <y>5019972.0</y>
+    <depth>-3758.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row66>
+  <row67>
+    <id>228875</id>
+    <faultId>None</faultId>
+    <x>581274.0</x>
+    <y>5019671.0</y>
+    <depth>-3768.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row67>
+  <row68>
+    <id>228876</id>
+    <faultId>None</faultId>
+    <x>582240.0</x>
+    <y>5019395.0</y>
+    <depth>-3675.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row68>
+  <row69>
+    <id>228877</id>
+    <faultId>None</faultId>
+    <x>583206.0</x>
+    <y>5019139.0</y>
+    <depth>-3492.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row69>
+  <row70>
+    <id>228878</id>
+    <faultId>None</faultId>
+    <x>579602.0</x>
+    <y>5021131.0</y>
+    <depth>-4368.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row70>
+  <row71>
+    <id>228879</id>
+    <faultId>None</faultId>
+    <x>580566.0</x>
+    <y>5020912.0</y>
+    <depth>-4004.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row71>
+  <row72>
+    <id>228880</id>
+    <faultId>None</faultId>
+    <x>581533.0</x>
+    <y>5020615.0</y>
+    <depth>-3983.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row72>
+  <row73>
+    <id>228881</id>
+    <faultId>None</faultId>
+    <x>582500.0</x>
+    <y>5020334.0</y>
+    <depth>-3885.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row73>
+  <row74>
+    <id>228882</id>
+    <faultId>None</faultId>
+    <x>583467.0</x>
+    <y>5020069.0</y>
+    <depth>-3784.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row74>
+  <row75>
+    <id>228883</id>
+    <faultId>None</faultId>
+    <x>579863.0</x>
+    <y>5022036.0</y>
+    <depth>-4815.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row75>
+  <row76>
+    <id>228884</id>
+    <faultId>None</faultId>
+    <x>580828.0</x>
+    <y>5021794.0</y>
+    <depth>-4558.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row76>
+  <row77>
+    <id>228885</id>
+    <faultId>None</faultId>
+    <x>581794.0</x>
+    <y>5021552.0</y>
+    <depth>-4283.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row77>
+  <row78>
+    <id>228886</id>
+    <faultId>None</faultId>
+    <x>582759.0</x>
+    <y>5021307.0</y>
+    <depth>-4089.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row78>
+  <row79>
+    <id>228887</id>
+    <faultId>None</faultId>
+    <x>583726.0</x>
+    <y>5021028.0</y>
+    <depth>-4067.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row79>
+  <row80>
+    <id>228888</id>
+    <faultId>None</faultId>
+    <x>580123.0</x>
+    <y>5022973.0</y>
+    <depth>-5073.0</depth>
+    <localName>thrust_SA_campazzo_1000</localName>
+</row80>
+</FaultsAll3d>

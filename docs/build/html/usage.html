@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Usage &#8212; Prova2 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to ISPRA PROJECT’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
+<section id="connessione-e-creazione-delle-tabelle">
+<h2>Connessione e Creazione delle tabelle<a class="headerlink" href="#connessione-e-creazione-delle-tabelle" title="Permalink to this heading">¶</a></h2>
+<p>Si può utilizzare la classe <code class="docutils literal notranslate"><span class="pre">Connection()</span></code> e i relativi metodi per effettuare la connessione.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Connection" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Connection<span class="colon">:</span></dt>
+<dd class="field-odd"><p>richiama una funzione che apre la connessione al database postgres.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Connection.check_connection">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Connection.check_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>verifica appunto la connessione.</p>
+</dd></dl>
+
+<p>La connessione può essere chiusa mediante <code class="docutils literal notranslate"><span class="pre">close_connection()</span></code> fornendogli in ingresso la connessione.</p>
+</dd></dl>
+
+<p>Nella classe <code class="docutils literal notranslate"><span class="pre">BoostrapSchema</span></code> vengono definite le query per la creazione delle tabelle.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="BoostrapSchema">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BoostrapSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BoostrapSchema" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Table_list<span class="colon">:</span></dt>
+<dd class="field-odd"><p>una lista appunto contenente delle funzioni, ognuna delle quali contiene la query per la creazione della relativa tabella.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="BoostrapSchema.execute_query">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BoostrapSchema.execute_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>prende in ingresso la connessione ed esegue la query per ogni tabella all’interno della lista.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BoostrapSchema.commit_query">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commit_query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BoostrapSchema.commit_query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caricamento-dati">
+<h2>Caricamento Dati<a class="headerlink" href="#caricamento-dati" title="Permalink to this heading">¶</a></h2>
+<p>La classe <code class="docutils literal notranslate"><span class="pre">CSV</span> <span class="pre">Reader</span></code> può essere utilizzata per leggere gli excel.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="CSVReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CSVReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Data<span class="colon">:</span></dt>
+<dd class="field-odd"><p>viene restituito dal metodo <code class="docutils literal notranslate"><span class="pre">load_excel</span></code></p>
+</dd>
+<dt class="field-even">Nrows<span class="colon">:</span></dt>
+<dd class="field-even"><p>viene restituito dal metodo <code class="docutils literal notranslate"><span class="pre">num_rows</span></code></p>
+</dd>
+<dt class="field-odd">Column_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p>viene restituito dal metodo <code class="docutils literal notranslate"><span class="pre">retrieve_column</span></code></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="CSVReader.load_excel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader.load_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>restituisce la tabella excel fornendogli in ingresso il path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CSVReader.num_rows">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_rows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader.num_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>restituisce il numero di righe, prendendo in ingresso la tabella</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CSVReader.retrieve_column">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">retrieve_column</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CSVReader.retrieve_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>restituisce solo parte della tabella, quella relativa alle colonne selezionate (prende in ingresso la tabella e una lista di colonne)</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>La classe <code class="docutils literal notranslate"><span class="pre">Dynamic</span> <span class="pre">Load</span></code> viene utilizzata per caricare in ciascun file dto i dati presi dalle tabelle excel.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="DynamicLoad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DynamicLoad</span></span><a class="headerlink" href="#DynamicLoad" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="DynamicLoad.to_dto">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_dto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DynamicLoad.to_dto" title="Permalink to this definition">¶</a></dt>
+<dd><p>questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall’excel. Con due cicli for annidati (all’esterno sulle colonne, all’interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Più nel dettaglio, i nomi delle colonne degli excel vengono modificate mediante i metodi parser affinchè corrispondano alle funzione di set e get di ciascun dto:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="parse_method_name">
+<span class="sig-name descname"><span class="pre">parse_method_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parse_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>prende in ingresso il nome della colonna, e si occupa di mettere il “_” prima di ogni lettera maiuscola all’interno della parola (tranne la prima) e rende tutte le lettere minuscole</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="parse_method_element">
+<span class="sig-name descname"><span class="pre">parse_method_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parse_method_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>si occupa di verificare se ci solo elementi NaN e in caso sotituirli con “None”</p>
+</dd></dl>
+
+</section>
+<section id="mapping-to-models">
+<h2>Mapping to Models<a class="headerlink" href="#mapping-to-models" title="Permalink to this heading">¶</a></h2>
+<p>Per ogni tabella del database è stato creato un <code class="docutils literal notranslate"><span class="pre">Mapper</span></code> mediante cui i dati vengono trasferiti dal dto al model</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Mapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Mapper</span></span><a class="headerlink" href="#Mapper" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="Mapper.to_model_list_boundary_info">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_model_list_boundary_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mapper.to_model_list_boundary_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>prende in ingresso la lista degli oggetti di un dto, e per ogni elemento della lista (ogni oggetto) tutti i campi vengono inseriti nel model mediante il metodo <code class="docutils literal notranslate"><span class="pre">to_model</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Mapper.to_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mapper.to_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>prende in ingresso un oggetto del dto e mappa singolarmente ogni campo dal dto al model mediante le funzioni di set e get</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="metodi-di-insert">
+<h2>Metodi di Insert<a class="headerlink" href="#metodi-di-insert" title="Permalink to this heading">¶</a></h2>
+<p>I dati così inseriti nei model vengono mappati nel database mediante insert query.
+Questo avviene all’interno dei metodi definiti nella classe <code class="docutils literal notranslate"><span class="pre">Repository</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Repository">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Repository</span></span><a class="headerlink" href="#Repository" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Insert_query<span class="colon">:</span></dt>
+<dd class="field-odd"><p>query di insert in cui vengono specificati quali valori inserire in quale tabella</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Repository.populate_tabella">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_tabella</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Repository.populate_tabella" title="Permalink to this definition">¶</a></dt>
+<dd><p>prende in ingresso la lista contenente gli oggetti models e in un ciclo for scorro tutti gli elementi, ad uno ad uno ciascun oggetto viene scomposto nei suoi campi mediante il metodo <code class="docutils literal notranslate"><span class="pre">model_to_tuple</span></code> che mi da proprio i valori della INSERT; pertanto tutti i valori di un oggetto vengono mappati nel database ad ogni iterazione del ciclo.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="altre-funzioni">
+<h2>Altre Funzioni<a class="headerlink" href="#altre-funzioni" title="Permalink to this heading">¶</a></h2>
+<p>Una funzione che automatizza tutte le operazioni sopra descritte è il <code class="docutils literal notranslate"><span class="pre">mapper_cycle</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mapper_cycle">
+<span class="sig-name descname"><span class="pre">mapper_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lista_colonne</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mapper_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso solo la connessione e una lista contenente a sua volta liste con gli indici delle colonne da considerare per ciascun file. In particolare, viene settato di default un path e questa funzione si prende tutti i file excel che trova lì; questi ultimi vengono riordinati (perchè la creazione delle tabelle avviene secondo l’ordine nella lista) e poi singolarmente a questi file vengono applicate le funzioni to_dto, to_model_list e populate_tabella (grazie ad opportune reflection).</p>
+</dd></dl>
+
+<p>Funzione per eliminare le tabelle dal database: <code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">schema</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="clear_schema">
+<span class="sig-name descname"><span class="pre">clear_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit.</p>
+</dd></dl>
+
+<p>Funzione per convertire una tabella in formato XML: <code class="docutils literal notranslate"><span class="pre">table_to_xml</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="table_to_xml">
+<span class="sig-name descname"><span class="pre">table_to_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#table_to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso il nome della tabella, lo schema dove è definita e la connessione; queste informazioni servono per accedere alla specifica tabella nel database e prelevare tutte le informazioni in essa contenute, per poi riadattarle nel formato di output (xml).</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Prova2</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connessione-e-creazione-delle-tabelle">Connessione e Creazione delle tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caricamento-dati">Caricamento Dati</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapping-to-models">Mapping to Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metodi-di-insert">Metodi di Insert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#altre-funzioni">Altre Funzioni</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to ISPRA PROJECT’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, giulia.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
