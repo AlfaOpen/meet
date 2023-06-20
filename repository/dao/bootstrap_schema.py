@@ -44,7 +44,7 @@ class BoostrapSchema:
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
                            isoline(), isoline_info(), composition_part(),
-                           geological_event(), faults(), faults_shp(), faults_all_3d()]
+                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure()]
 
     def execute_query(self, connection):
         cursor = connection.cursor()
@@ -262,7 +262,7 @@ def faults_shp():
     TABLESPACE pg_default;
     ALTER TABLE IF EXISTS public."FaultsShp"
         OWNER to giulia;'''
-    
+
     return table_faults_shp
 
 
@@ -288,7 +288,25 @@ def faults_all_3d():
 
     return table_faults_all_3d
 
-# def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
+
+def procedure():
+    table_procedure = '''CREATE TABLE IF NOT EXISTS public."Procedure"
+        (
+        "nome" varchar,
+        "listaFileExcel" text[],
+        "listaPath" text[], 
+        "listaColonne" text[],
+
+        CONSTRAINT "Procedure_pkey" PRIMARY KEY ("nome")
+        )
+        TABLESPACE pg_default;
+        ALTER TABLE IF EXISTS public."Procedure"
+            OWNER to giulia;'''
+
+    return table_procedure
+
+
+# def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni
 # uscita del mapper fa da solo il repository con le insert
 
 def mapper_cycle(connection, lista_colonne):
@@ -332,7 +350,7 @@ def mapper_cycle(connection, lista_colonne):
 
 def clear_schema(connection):
     drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
-     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d" '''
+     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d", public."Procedure"'''
     cursor = connection.cursor()
     cursor.execute(drop_query)
     connection.commit()
