@@ -262,12 +262,13 @@ def faults_all_3d():
 def procedure():
     table_procedure = '''CREATE TABLE IF NOT EXISTS public."Procedure"
         (
-        "nome" varchar,
+        "id" int NOT NULL, 
+        "nome" varchar UNIQUE,
         "listaFileExcel" text[],
         "listaPath" text[], 
         "listaColonne" text[],
 
-        CONSTRAINT "Procedure_pkey" PRIMARY KEY ("nome")
+        CONSTRAINT "Procedure_pkey" PRIMARY KEY ("id")
         )
         TABLESPACE pg_default;
         ALTER TABLE IF EXISTS public."Procedure"
@@ -318,13 +319,38 @@ def mapper_cycle(connection, lista_colonne):
     print('Insert effettuate correttamente')
 
 
-def clear_schema(connection):
+def clear_schema_all(connection):
     drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
-     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d", public."Procedure"'''
+     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)
     connection.commit()
     print('Tutte le tabelle sono state eliminate')
+
+
+def clear_schema_geounit(connection):
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
+     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    connection.commit()
+    print('Le tabelle selezionate sono state eliminate')
+
+
+def clear_schema_faults(connection):
+    drop_query = '''DROP TABLE if exists public."Faults", public."FaultsShp", public."FaultsAll3d" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    connection.commit()
+    print('Le tabelle selezionate sono state eliminate')
+
+def remake_schema_procedure(connection):
+    drop_query = '''DROP TABLE if exists public."Procedure" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    cursor.execute(procedure())
+    connection.commit()
+    print('La tabella procedura è stata eliminata e nuovamente creata')
 
 # public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
 #     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit"
