@@ -2,7 +2,7 @@ import logging
 import pathlib
 import ast
 
-from repository.dao.bootstrap_schema import clear_schema, BoostrapSchema, mapper_cycle
+from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle
 from repository.dynamic_load import dynamic_load
 from repository.dynamic_load.dynamic_load import DynamicLoad
 from utility.parser import parse_method_name
