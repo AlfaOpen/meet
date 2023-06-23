@@ -1,15 +1,9 @@
 import logging
-import pathlib
 
-from mapper.isoline_info_mapper import IsolineInfoMapper
-from model.boundary import Boundary
 from repository.connection.connection import Connection, close_connection
 from repository.dao.bootstrap_schema import clear_schema, BoostrapSchema, mapper_cycle
-from repository.dao.isoline_info_repository import IsolineInfoRepo
-from repository.dynamic_load.dynamic_load import DynamicLoad
-from repository.reader.csv_reader import CSVReader
-from utility.format_convert import table_to_xml
-from service.execution_service import execution_service
+from service.dynamic_load_service import DynamicLoad
+
 
 def main():
     dynamic_load = DynamicLoad()

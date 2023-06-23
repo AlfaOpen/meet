@@ -109,3 +109,5 @@ GitHub.sublime-settings
 .history
 
 ./*.xlsx
+./*.xml
+output/*
