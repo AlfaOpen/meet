@@ -13,7 +13,7 @@ from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_
 from repository.dao.isoline_info_repository import IsolineInfoRepo
 from repository.dynamic_load.dynamic_load import DynamicLoad
 from repository.reader.csv_reader import CSVReader
-from service.generalize_execution import read_query, genera_procedure
+from service.generalize_execution import read_query, genera_procedure, delete_query
 from utility.format_convert import table_to_xml
 from service.execution_service import execution_service
 
@@ -39,6 +39,7 @@ def main():
                     [0, 1, 2, 3, 4, 6, 7, 8, 9, 10], [0, 1, 3, 4], [], [0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12]]
     #  nella lista_colonne_excel ci sono le colonne di tutte le tabelle (unit + faglie) dove le faglie iniziano dopo composition part seguendo l'ordine alfabetico con cui le carica nel programma
 
+    lista_geo_unit= [[], [], [0, 1, 2, 3, 4, 8], [0, 1, 3, 4, 5, 6], [0, 1, 3, 4], [], [0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12]]
     # mapper_cycle(opened_connection.connection, lista_colonne_excel)
     # DIFFERENZE TRA CARICAMENTO UNIT E FAGLIE: cambiare la lista nel mapper, cambiare i due percorsi all'interno
     # della funzione mapper
@@ -51,7 +52,7 @@ def main():
 
     genera_procedure(opened_connection.connection)
 
-
+    # delete_query(opened_connection.connection,"insert_geounit")
 
     # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
 
