@@ -1,37 +1,7 @@
-import ast
 import os
 
-from dto.isoline_info_dto import IsolineInfoDto
-from mapper.faults_all3d_mapper import FaultsAll3dMapper
-from mapper.faults_mapper import FaultsMapper
-from mapper.faults_shp_mapper import FaultsShpMapper
-from mapper.isoline_info_mapper import IsolineInfoMapper
-from mapper.isoline_mapper import IsolineMapper
-from model.isoline import Isoline
-from model.isoline_info import IsolineInfo
-from repository.dao.faults_all3d_repository import FaultsAll3dRepo
-from repository.dao.faults_repository import FaultsRepo
-from repository.dao.faults_shp_repository import FaultsShpRepo
-from repository.dao.isoline_info_repository import IsolineInfoRepo
-from repository.dao.isoline_repository import IsolineRepo
-from repository.dynamic_load.dynamic_load import DynamicLoad
+from service.dynamic_load_service import DynamicLoad
 from utility.parser import parse_method_name
-from dto.isoline_dto import IsolineDto
-from dto.boundary_dto import BoundaryDto
-from dto.boundary_info_dto import BoundaryInfoDto
-from dto.composition_part_dto import CompositionPartDto
-from dto.geologic_unit_dto import GeologicUnitDto
-from dto.geological_event_dto import GeologicalEventDto
-from mapper.boundary_info_mapper import BoundaryInfoMapper
-from mapper.boundary_mapper import BoundaryMapper
-from mapper.composition_part_mapper import CompositionPartMapper
-from mapper.geologic_unit_mapper import GeologicUnitMapper
-from mapper.geological_event_mapper import GeologicalEventMapper
-from repository.dao.boundary_info_repository import BoundaryInfoRepo
-from repository.dao.boundary_repository import BoundaryRepo
-from repository.dao.composition_part_repository import CompositionPartRepo
-from repository.dao.geologic_unit_repository import GeologicUnitRepo
-from repository.dao.geological_event_repository import GeologicalEventRepo
 
 
 class BoostrapSchema:
