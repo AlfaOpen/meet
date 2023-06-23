@@ -1,0 +1,7 @@
+Boostrapschema module
+============
+
+.. automodule:: boostrap_schema
+   :members:
+   :undoc-members:
+   :show-inheritance:

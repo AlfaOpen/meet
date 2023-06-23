@@ -8,8 +8,6 @@ class Isoline:
         self._iso_type = None
 
     def get_isoline_id(self):  # PRIMARY KEY
-        if self._isoline_id == 0:
-            return "Not Present"
         return self._isoline_id
 
     def set_isoline_id(self, isoline_id):
@@ -28,8 +26,6 @@ class Isoline:
         self._name = name
 
     def get_boundary_id(self):  # FOREIGN KEY
-        if self._boundary_id == 0:
-            return "Not Present"
         return self._boundary_id
 
     def set_boundary_id(self, boundary_id):
