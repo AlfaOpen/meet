@@ -3,8 +3,8 @@ import pathlib
 import ast
 
 from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle
-from repository.dynamic_load import dynamic_load
-from repository.dynamic_load.dynamic_load import DynamicLoad
+from service import dynamic_load_service
+from service.dynamic_load_service import DynamicLoad
 from utility.parser import parse_method_name
 
 from mapper.faults_all3d_mapper import FaultsAll3dMapper

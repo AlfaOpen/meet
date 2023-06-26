@@ -6,7 +6,7 @@ class Connection:
     connection = None
 
     def __init__(self):
-        self.connection = create_connection()
+        self.connection = create_connection_postgis()
 
     @classmethod
     def check_connection(cls, connection):

@@ -14,11 +14,12 @@ class BoostrapSchema:
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
                            isoline(), isoline_info(), composition_part(),
-                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure()]
+                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure(), geometry()]
 
     def execute_query(self, connection):
         cursor = connection.cursor()
         for i in self.table_list:
+            print(i)
             cursor.execute(i)
 
     def commit_query(self, connection):
@@ -277,6 +278,24 @@ def procedure():
     return table_procedure
 
 
+def geometry():
+    table_prova_geom = '''CREATE TABLE IF NOT EXISTS public."Geometry"
+        (
+        "id" int NOT NULL, 
+        "x" float,
+        "y" float,
+        "depth" float, 
+        "the_geom" geometry,
+
+        CONSTRAINT "Geometry_pkey" PRIMARY KEY ("id")
+        )
+        TABLESPACE pg_default;
+        ALTER TABLE IF EXISTS public."Geometry"
+            OWNER to giulia;'''
+
+    return table_prova_geom
+
+
 # def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni
 # uscita del mapper fa da solo il repository con le insert
 
@@ -343,6 +362,7 @@ def clear_schema_faults(connection):
     cursor.execute(drop_query)
     connection.commit()
     print('Le tabelle selezionate sono state eliminate')
+
 
 def remake_schema_procedure(connection):
     drop_query = '''DROP TABLE if exists public."Procedure" '''
