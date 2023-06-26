@@ -12,6 +12,7 @@ class IsolineInfo:
         self._vertex_part_index = None
         self._distance = None
         self._angle = None
+        self._geometry = None
 
     def get_id(self):  # PRIMARY KEY
         return self._id
@@ -78,5 +79,11 @@ class IsolineInfo:
 
     def get_angle(self):
         return self._angle
+
+    def set_geometry(self, geometry):
+        self._geometry = geometry
+
+    def get_geometry(self):
+        return self._geometry
 
 

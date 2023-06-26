@@ -6,9 +6,11 @@ from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_
     clear_schema_faults, remake_schema_procedure
 
 from repository.reader.csv_reader import CSVReader
+from repository.reader.shp_reader import SHPReader
 from service import dynamic_load_service
 from service.dynamic_load_service import DynamicLoad
 from utility.parser import parse_method_name
+
 
 from mapper.faults_all3d_mapper import FaultsAll3dMapper
 from mapper.faults_mapper import FaultsMapper
@@ -162,6 +164,13 @@ def genera_procedure(connection):
         lista_num_col = listacolonne[i]
         model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
+        #TODO
+        # info = input("Se per il file "+ file + "si vogliono caricare dati relativi alla geometria digitare "
+        #                                        "'si'\nAltrimenti premere invio\n")
+        # if info == "si":
+        #     path_shp = "r"+ input ("Inserire il path dello shapefile da cui vanno caricati i dati\n")
+        #     tabled = dynamic_load.to_dto_geom(path, path_shp, file_dto, lista_num_col)
+        # else:
         tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
         file_mapper = globals()[model_class_str + "Mapper"]()
         str_par1 = parse_method_name(model_class_str)

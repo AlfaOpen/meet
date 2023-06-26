@@ -16,6 +16,7 @@ class IsolineInfoMapper:
         isoline_info.set_vertex_part_index(isoline_info_dto.get_vertex_part_index())
         isoline_info.set_distance(isoline_info_dto.get_distance())
         isoline_info.set_angle(isoline_info_dto.get_angle())
+        isoline_info.set_geometry(isoline_info_dto.get_geometry())
 
         return isoline_info
 

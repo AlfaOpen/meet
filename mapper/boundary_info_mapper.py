@@ -11,6 +11,7 @@ class BoundaryInfoMapper:
         boundary_info.set_y(boundary_info_dto.get_y())
         boundary_info.set_depth(boundary_info_dto.get_depth())
         boundary_info.set_thickness(boundary_info_dto.get_thickness())
+        boundary_info.set_geometry(boundary_info_dto.get_geometry())
         return boundary_info
 
     def to_model_list_boundary_info(self, list_boundary_info_dto: list):

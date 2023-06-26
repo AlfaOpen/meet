@@ -7,7 +7,8 @@ def model_to_tuple_boundary_info(model: BoundaryInfo):
             str(model.get_x()),
             str(model.get_y()),
             str(model.get_depth()),
-            (model.get_thickness()))
+            (model.get_thickness()),
+            model.get_geometry())
 
 
 class BoundaryInfoRepo:
@@ -17,7 +18,8 @@ class BoundaryInfoRepo:
     "x",
     "y",
     "depth",
-    "thickness") VALUES (%s, %s, %s, %s, %s, %s)"""
+    "thickness",
+    "geometry") VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection

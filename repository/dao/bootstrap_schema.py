@@ -19,7 +19,6 @@ class BoostrapSchema:
     def execute_query(self, connection):
         cursor = connection.cursor()
         for i in self.table_list:
-            print(i)
             cursor.execute(i)
 
     def commit_query(self, connection):
@@ -74,6 +73,8 @@ def boundary_info():
     "y" float,
     "depth" float,
     "thickness" float,
+    "geometry" geometry,
+    
     CONSTRAINT "BoundaryInfo_pkey" PRIMARY KEY ("idInfo3D"),
     CONSTRAINT "BoundaryInfo_Boundaryid_fkey" FOREIGN KEY ("boundaryId")
         REFERENCES public."Boundary" ("idBoundary") MATCH SIMPLE
@@ -164,6 +165,7 @@ def isoline_info():
     "vertexPartIndex" integer,
     "distance" float,
     "angle" float,
+    "geometry" geometry,
     
     CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("isoline")
@@ -223,6 +225,7 @@ def faults_shp():
     "vertexPartIndex" text,
     "distance" text,
     "angle" text,
+    "geometry" geometry,
 
     CONSTRAINT "FaultsShp_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsShp_Faults_fkey" FOREIGN KEY ("faultId")
@@ -246,6 +249,7 @@ def faults_all_3d():
     "y" float,
     "depth" float,
     "localName" varchar,
+    "geometry" geometry,
 
     CONSTRAINT "FaultsAll3d_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsAll3d_Faults_fkey" FOREIGN KEY ("faultId")
@@ -285,7 +289,7 @@ def geometry():
         "x" float,
         "y" float,
         "depth" float, 
-        "the_geom" geometry,
+        "geometry" geometry,
 
         CONSTRAINT "Geometry_pkey" PRIMARY KEY ("id")
         )

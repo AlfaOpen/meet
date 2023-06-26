@@ -6,6 +6,7 @@ class BoundaryInfoDto:
         self.y = None
         self.depth = None
         self.thickness = None
+        self._geometry = None
 
     def get_id(self):  # PRIMARY KEY
         return self._id
@@ -42,5 +43,11 @@ class BoundaryInfoDto:
 
     def get_thickness(self):
         return self.thickness
+
+    def set_geometry(self, geometry):
+        self._geometry = geometry
+
+    def get_geometry(self):
+        return self._geometry
 
 

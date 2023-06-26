@@ -7,6 +7,7 @@ class BoundaryInfo:
         self._y = None
         self._depth = None
         self._thickness = None
+        self._geometry = None
 
     def get_id(self):  # PRIMARY KEY
         return self._id
@@ -43,3 +44,9 @@ class BoundaryInfo:
 
     def get_thickness(self):
         return self._thickness
+
+    def set_geometry(self, geometry):
+        self._geometry = geometry
+
+    def get_geometry(self):
+        return self._geometry

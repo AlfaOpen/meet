@@ -12,7 +12,8 @@ def model_to_tuple_iso_info(model: IsolineInfo):
             str(model.get_vertex_part()),
             str(model.get_vertex_part_index()),
             str(model.get_distance()),
-            str(model.get_angle()))
+            str(model.get_angle()),
+            model.get_geometry())
 
 
 class IsolineInfoRepo:
@@ -27,7 +28,8 @@ class IsolineInfoRepo:
     "vertexPart",
     "vertexPartIndex",
     "distance",
-    "angle") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    "angle",
+    "geometry") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection

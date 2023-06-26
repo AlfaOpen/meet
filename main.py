@@ -8,8 +8,9 @@ from ast import literal_eval
 from mapper.isoline_info_mapper import IsolineInfoMapper
 from model.boundary import Boundary
 from repository.connection.connection import Connection, close_connection
-from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_faults
+from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_faults, clear_schema_geounit
 from repository.dao.isoline_info_repository import IsolineInfoRepo
+from repository.reader.shp_reader import SHPReader
 from service import dynamic_load_service
 from service.dynamic_load_service import DynamicLoad
 from repository.reader.csv_reader import CSVReader
@@ -26,7 +27,8 @@ def main():
     if not Connection.check_connection(opened_connection.connection):
         return logging.info("Error in connection")
 
-    # clear_schema(opened_connection.connection)
+    # clear_schema_geounit(opened_connection.connection)
+    # clear_schema_faults(opened_connection.connection)
 
     # drop_query = '''DROP TABLE if exists public."Geometry" '''
     # cursor = opened_connection.connection.cursor()
@@ -59,9 +61,13 @@ def main():
 
     # genera_procedure(opened_connection.connection)
 
+    # shp1= SHPReader()
+    # shp1.shp_reader(r"C:\Users\giuli\Documents\shp_da_faultsAll.shp")
+
+
     # delete_query(opened_connection.connection,"insert_geounit")
 
-    # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
+   # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
 
     close_connection(opened_connection.connection)
 

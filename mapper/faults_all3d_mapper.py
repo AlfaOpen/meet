@@ -11,6 +11,7 @@ class FaultsAll3dMapper:
         faults_all3d.set_y(faults_all3d_dto.get_y())
         faults_all3d.set_depth(faults_all3d_dto.get_depth())
         faults_all3d.set_local_name(faults_all3d_dto.get_local_name())
+        faults_all3d.set_geometry(faults_all3d_dto.get_geometry())
         return faults_all3d
 
     def to_model_list_faults_all3d(self, list_faults_all3d_dto: list):

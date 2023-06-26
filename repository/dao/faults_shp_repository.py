@@ -11,7 +11,8 @@ def model_to_tuple_faults_shp(model: FaultsShp):
             (model.get_vertex_part()),
             (model.get_vertex_part_index()),
             (model.get_distance()),
-            (model.get_angle()))
+            (model.get_angle()),
+            model.get_geometry())
 
 
 class FaultsShpRepo:
@@ -25,7 +26,8 @@ class FaultsShpRepo:
     "vertexPart",
     "vertexPartIndex",
     "distance",
-    "angle") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    "angle",
+    "geometry") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection
