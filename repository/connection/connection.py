@@ -23,6 +23,13 @@ def create_connection():
                             port="5432",
                             database="postgres")
 
+def create_connection_postgis():
+    return psycopg2.connect(user="giulia",
+                            password="password",
+                            host="127.0.0.1",
+                            port="5433",
+                            database="postgres")
+
 
 def close_connection(connection):
     if connection:
