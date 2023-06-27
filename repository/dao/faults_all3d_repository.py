@@ -8,7 +8,7 @@ def model_to_tuple_faults_all3d(model: FaultsAll3d):
             str(model.get_y()),
             str(model.get_depth()),
             str(model.get_local_name()),
-            model.get_geometry())
+            str(model.get_geometry()))
 
 
 class FaultsAll3dRepo:

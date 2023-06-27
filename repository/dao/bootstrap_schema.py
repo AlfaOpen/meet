@@ -13,12 +13,13 @@ class BoostrapSchema:
 
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
-                           isoline(), isoline_info(), composition_part(),
-                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure(), geometry()]
+                           isoline(), isoline_geometry(), isoline_info(), composition_part(),
+                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure()]
 
     def execute_query(self, connection):
         cursor = connection.cursor()
         for i in self.table_list:
+            print(i)
             cursor.execute(i)
 
     def commit_query(self, connection):
@@ -151,11 +152,31 @@ def isoline():
     return table_isoline
 
 
+def isoline_geometry():
+    table_isoline_geometry = '''CREATE TABLE IF NOT EXISTS public."IsolineGeometry"
+    (
+    "idIsolineGeometry" varchar NOT NULL,
+    "isoline" varchar,
+    "idIsobata" integer,
+    "geometry" geometry,
+    CONSTRAINT "IsolineGeometry_pkey" PRIMARY KEY ("idIsolineGeometry"),
+    CONSTRAINT "IsolineGeometry_Isoline_fkey" FOREIGN KEY ("isoline")
+        REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."IsolineGeometry"
+        OWNER to giulia;'''
+
+    return table_isoline_geometry
+
+
 def isoline_info():
     table_isoline_info = '''CREATE TABLE IF NOT EXISTS public."IsolineInfo"
     (
     "id" integer NOT NULL,
-    isoline varchar,
+    "isolineGeometry" varchar,
     "isoValue" integer,
     "x" float,
     "y" float,
@@ -164,12 +185,10 @@ def isoline_info():
     "vertexPart" integer,
     "vertexPartIndex" integer,
     "distance" float,
-    "angle" float,
-    "geometry" geometry,
-    
+    "angle" float,    
     CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("id"),
-    CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("isoline")
-        REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE
+    CONSTRAINT "IsolineInfo_IsolineGeoemtry_fkey" FOREIGN KEY ("isolineGeometry")
+        REFERENCES public."IsolineGeometry" ("idIsolineGeometry") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -202,6 +221,7 @@ def faults():
     "reference" varchar,
     "strike" varchar,
     "uri" varchar,
+    "geometry" geometry,
     
     CONSTRAINT "Faults._pkey" PRIMARY KEY ("id")
     )
@@ -225,7 +245,6 @@ def faults_shp():
     "vertexPartIndex" text,
     "distance" text,
     "angle" text,
-    "geometry" geometry,
 
     CONSTRAINT "FaultsShp_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsShp_Faults_fkey" FOREIGN KEY ("faultId")
@@ -282,23 +301,6 @@ def procedure():
     return table_procedure
 
 
-def geometry():
-    table_prova_geom = '''CREATE TABLE IF NOT EXISTS public."Geometry"
-        (
-        "id" int NOT NULL, 
-        "x" float,
-        "y" float,
-        "depth" float, 
-        "geometry" geometry,
-
-        CONSTRAINT "Geometry_pkey" PRIMARY KEY ("id")
-        )
-        TABLESPACE pg_default;
-        ALTER TABLE IF EXISTS public."Geometry"
-            OWNER to giulia;'''
-
-    return table_prova_geom
-
 
 # def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni
 # uscita del mapper fa da solo il repository con le insert
@@ -352,7 +354,7 @@ def clear_schema_all(connection):
 
 
 def clear_schema_geounit(connection):
-    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
      public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)

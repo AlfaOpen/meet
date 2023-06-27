@@ -15,7 +15,6 @@ class FaultsShpMapper:
         faults_shp.set_vertex_part_index(faults_shp_dto.get_vertex_part_index())
         faults_shp.set_distance(faults_shp_dto.get_distance())
         faults_shp.set_angle(faults_shp_dto.get_angle())
-        faults_shp.set_geometry(faults_shp_dto.get_geometry())
 
         return faults_shp
 

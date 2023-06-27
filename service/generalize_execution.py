@@ -1,6 +1,12 @@
 import logging
 import pathlib
 import ast
+from array import array
+import signal
+import time
+import geopandas as gpd
+import re
+
 
 from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_all, clear_schema_geounit, \
     clear_schema_faults, remake_schema_procedure
@@ -56,21 +62,27 @@ def delete_query(connection, nome):
 def genera_procedure(connection):
     dynamic_load = DynamicLoad()
     csvreader = CSVReader()
+    dire = pathlib.Path().resolve()
 
     comando = input(
         "Per eliminare tutte le tabelle nel database scrivere '1'; \nPer eliminare le tabelle nel database relative "
         "all'unità geologica scrivere '2'; \nPer eliminare le tabelle nel database relative alle faglie scrivere '3'; "
         "\nAltrimenti premere invio\n")
-    if comando == "1":
+    match2 = re.search("^\s*1\s*$", comando)
+    match3 = re.search("^\s*2\s*$", comando)
+    match4 = re.search("^\s*3\s*$", comando)
+
+    if match2:
         clear_schema_all(connection)
 
-    elif comando == "2":
+    elif match3:
         clear_schema_geounit(connection)
 
-    elif comando == "3":
+    elif match4:
         clear_schema_faults(connection)
 
     comando1 = input("Per creare tutte le tabelle nel database scrivi 'crea', altrimenti premi invio\n")
+    match5 = re.search("^\s*crea\s*$", comando, re.IGNORECASE)
     if comando1 == "crea":
         boostrap_schema = BoostrapSchema()
         boostrap_schema.execute_query(connection)
@@ -86,12 +98,12 @@ def genera_procedure(connection):
     else:
         scelta_proc = input("Se vuoi usare una procedura già esistente digita 'si'\nAltrimenti premere invio\n")
 
-    if scelta_proc == "si":
-        print("Scegli una tra le seguenti procedure, riscrivendola esattamente com'è:\n")
+    match1 = re.search("^\s*s\s*i\s*$", scelta_proc, re.IGNORECASE)
+    if match1:
         for i in lista_procedure:
             print(i)
         nome_proc = input(
-            "Queste sono le procedure disponibili. Per sceglierne una riscrivila esattamente com'è:\n")
+            "Scegli una tra queste procedure, riscrivendola esattamente com'è:\n")
         q2 = """ SELECT * FROM public."Procedure" WHERE nome = '%s' """ % nome_proc
         extr_riga = read_query(connection, q2)
         riga_proc = extr_riga[0]
@@ -105,7 +117,6 @@ def genera_procedure(connection):
             # lista di liste)
 
     else:
-        dire = pathlib.Path().resolve()
         print(dire)
         print(
             "Quello sopra riportato è il path della cartella in cui si trova l'eseguibile \nInserire i file excel che "
@@ -161,17 +172,30 @@ def genera_procedure(connection):
     for i in range(0, len(listaexcel)):
         file = listaexcel[i]
         path = listapath[i]
+        print(path)
         lista_num_col = listacolonne[i]
+        print(lista_num_col)
         model_class_str = file[0:-5]
         file_dto = (model_class_str + "Dto")
-        #TODO
-        # info = input("Se per il file "+ file + "si vogliono caricare dati relativi alla geometria digitare "
-        #                                        "'si'\nAltrimenti premere invio\n")
-        # if info == "si":
-        #     path_shp = "r"+ input ("Inserire il path dello shapefile da cui vanno caricati i dati\n")
-        #     tabled = dynamic_load.to_dto_geom(path, path_shp, file_dto, lista_num_col)
-        # else:
-        tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
+        print(file_dto)
+        info = input("Se per il file "+ file + " si vogliono caricare dati relativi alla geometria digitare "
+                                               "'si'\nAltrimenti premere invio\n")
+        match = re.search("^\s*s\s*i\s*$", info, re.IGNORECASE)
+        if match:
+            nome = input("Se lo shapefile è già nel seguente path inserire il nome, includendo l'estensione del file\n"
+                    + str(dire) + "\nAltrimenti dopo il caricamento chiudere la finestra e riavviare.\n")
+            if nome[-4:] == ".shp":
+                path_shp = str(dire)+"\\"+nome
+                print(path_shp)
+            else:
+                nome1 = input("Il file non è stato fornito nel formato corretto.\nRiprovare\n")
+                if nome1[-4:] == ".shp":
+                    path_shp = str(dire) + "\\" + nome1
+                else:
+                    break
+            tabled = dynamic_load.to_dto_geom(path, path_shp, file_dto, lista_num_col)
+        else:
+            tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
         file_mapper = globals()[model_class_str + "Mapper"]()
         str_par1 = parse_method_name(model_class_str)
         metodo_par1 = "to_model_list_" + str_par1
@@ -184,7 +208,7 @@ def genera_procedure(connection):
 
     print('Insert effettuate correttamente')
 
-    if scelta_proc != "si":
+    if not match1:
         nome_meth = input("Si desidera salvare questa procedura?\n Se si, inserire il nome che si vuole dare alla "
                           "procedura, altrimenti digitare 'no'\nN.B.: NON si può inserire un nome già esistente\n")
         if nome_meth != "no":

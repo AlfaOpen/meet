@@ -6,7 +6,7 @@ class IsolineInfoMapper:
     def to_model(self, isoline_info_dto):
         isoline_info = IsolineInfo()
         isoline_info.set_id(isoline_info_dto.get_id())
-        isoline_info.set_isoline_id(isoline_info_dto.get_isoline_id())
+        isoline_info.set_geom_id(isoline_info_dto.get_geom_id())
         isoline_info.set_iso_value(isoline_info_dto.get_iso_value())
         isoline_info.set_x(isoline_info_dto.get_x())
         isoline_info.set_y(isoline_info_dto.get_y())
@@ -16,7 +16,6 @@ class IsolineInfoMapper:
         isoline_info.set_vertex_part_index(isoline_info_dto.get_vertex_part_index())
         isoline_info.set_distance(isoline_info_dto.get_distance())
         isoline_info.set_angle(isoline_info_dto.get_angle())
-        isoline_info.set_geometry(isoline_info_dto.get_geometry())
 
         return isoline_info
 

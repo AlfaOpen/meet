@@ -77,15 +77,17 @@ class DynamicLoad:
                 metodo_par = "set_" + str_par
                 metodo = getattr(istanza, metodo_par)
                 elemento = csv.data[nomi_col[k]][i]
-                # print(elemento)
-                if type(elemento) is not str:
-                    nuovo_elemento = parse_method_element(elemento)
-                else:
+                if k == len(nomi_col)-1:
                     nuovo_elemento = elemento
-                # print(nuovo_elemento)
+                else:
+                    if type(elemento) is not str:
+                        nuovo_elemento = parse_method_element(elemento)
+                    else:
+                        nuovo_elemento = elemento
                 metodo(nuovo_elemento)
                 k += 1
             tabella.append(istanza)
+        print("Lunghezza della tabella: "+ str(len(tabella)))
         return tabella
 
 

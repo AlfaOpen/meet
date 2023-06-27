@@ -8,7 +8,7 @@ def model_to_tuple_boundary_info(model: BoundaryInfo):
             str(model.get_y()),
             str(model.get_depth()),
             (model.get_thickness()),
-            model.get_geometry())
+            str(model.get_geometry()))
 
 
 class BoundaryInfoRepo:

@@ -24,6 +24,7 @@ class FaultsMapper:
         faults.set_reference(faults_dto.get_reference())
         faults.set_strike(faults_dto.get_strike())
         faults.set_uri(faults_dto.get_uri())
+        faults.set_geometry(faults_dto.get_geometry())
 
         return faults
 

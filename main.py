@@ -4,8 +4,11 @@ from array import array
 import signal
 import time
 from ast import literal_eval
+import re
 
 from mapper.isoline_info_mapper import IsolineInfoMapper
+from mapper.faults_all3d_mapper import FaultsAll3dMapper
+from repository.dao.faults_all3d_repository import FaultsAll3dRepo
 from model.boundary import Boundary
 from repository.connection.connection import Connection, close_connection
 from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_faults, clear_schema_geounit
@@ -17,6 +20,7 @@ from repository.reader.csv_reader import CSVReader
 from service.generalize_execution import read_query, genera_procedure, delete_query
 from utility.format_convert import table_to_xml
 from service.execution_service import execution_service
+from utility.parser import parse_method_name
 
 
 def main():
@@ -30,12 +34,7 @@ def main():
     # clear_schema_geounit(opened_connection.connection)
     # clear_schema_faults(opened_connection.connection)
 
-    # drop_query = '''DROP TABLE if exists public."Geometry" '''
-    # cursor = opened_connection.connection.cursor()
-    # cursor.execute(drop_query)
-    # opened_connection.connection.commit()
-    # print('Le tabelle selezionate sono state eliminate')
-    #
+
     # boostrap_schema = BoostrapSchema()
     # boostrap_schema.execute_query(opened_connection.connection)
     # boostrap_schema.commit_query(opened_connection.connection)
@@ -61,13 +60,20 @@ def main():
 
     # genera_procedure(opened_connection.connection)
 
-    # shp1= SHPReader()
-    # shp1.shp_reader(r"C:\Users\giuli\Documents\shp_da_faultsAll.shp")
+    # shp1 = SHPReader()
+    # shp1.shp_reader(r"C:\Users\giuli\PycharmProjects\pythonProject\faults_PoBasin.shp")
+
+
+    # id= "2"
+    # nome_m= "insert_geounit"
+    # list_excel = ['GeologicUnit.xlsx', 'Boundary.xlsx', 'BoundaryInfo.xlsx', 'CompositionPart.xlsx', 'GeologicalEvent.xlsx', 'Isoline.xlsx', 'IsolineGeometry.xlsx', 'IsolineInfo.xlsx']
+    # list_path = ['C:\\Users\\giuli\\PycharmProjects\\pythonProject\\GeologicUnit.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\Boundary.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\BoundaryInfo.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\CompositionPart.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\GeologicalEvent.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\Isoline.xlsx','C:\\Users\\giuli\\PycharmProjects\\pythonProject\\IsolineGeometry.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\IsolineInfo.xlsx']
+    # list_col = ['[]', '[]', '[0, 1, 2, 3, 4, 8]', '[0, 1, 3, 4, 5, 6]', '[0, 1, 3, 4]', '[]', '[]', '[0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12]']
 
 
     # delete_query(opened_connection.connection,"insert_geounit")
 
-   # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
+    # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
 
     close_connection(opened_connection.connection)
 
