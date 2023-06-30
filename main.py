@@ -58,7 +58,7 @@ def main():
 
     # execution_service(opened_connection.connection)
 
-    # genera_procedure(opened_connection.connection)
+    genera_procedure(opened_connection.connection)
 
     # shp1 = SHPReader()
     # shp1.shp_reader(r"C:\Users\giuli\PycharmProjects\pythonProject\faults_PoBasin.shp")

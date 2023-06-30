@@ -108,6 +108,13 @@ GitHub.sublime-settings
 !.vscode/extensions.json
 .history
 
-./*.xlsx
-./*.xml
+*.xlsx
+*.xml
+*.shp
+*.dbf
+*.prj
+*.cpg
+*.shx
+*.qmd
+./
 output/*

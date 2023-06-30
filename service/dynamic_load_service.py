@@ -7,6 +7,7 @@ from dto.faults_shp_dto import FaultsShpDto
 from dto.geologic_unit_dto import GeologicUnitDto
 from dto.geological_event_dto import GeologicalEventDto
 from dto.isoline_dto import IsolineDto
+from dto.isoline_geometry_dto import IsolineGeometryDto
 from dto.isoline_info_dto import IsolineInfoDto
 
 from repository.reader.csv_reader import CSVReader
