@@ -19,7 +19,6 @@ class BoostrapSchema:
     def execute_query(self, connection):
         cursor = connection.cursor()
         for i in self.table_list:
-            print(i)
             cursor.execute(i)
 
     def commit_query(self, connection):
@@ -289,8 +288,9 @@ def procedure():
         "id" int NOT NULL, 
         "nome" varchar UNIQUE,
         "listaFileExcel" text[],
-        "listaPath" text[], 
+        "listaPathXlsx" text[], 
         "listaColonne" text[],
+        "listaPathShp" text[],
 
         CONSTRAINT "Procedure_pkey" PRIMARY KEY ("id")
         )

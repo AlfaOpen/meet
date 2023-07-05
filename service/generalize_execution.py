@@ -82,8 +82,8 @@ def genera_procedure(connection):
         clear_schema_faults(connection)
 
     comando1 = input("Per creare tutte le tabelle nel database scrivi 'crea', altrimenti premi invio\n")
-    match5 = re.search("^\s*crea\s*$", comando, re.IGNORECASE)
-    if comando1 == "crea":
+    match5 = re.search("^\s*crea\s*$", comando1, re.IGNORECASE)
+    if match5:
         boostrap_schema = BoostrapSchema()
         boostrap_schema.execute_query(connection)
         boostrap_schema.commit_query(connection)
@@ -107,14 +107,46 @@ def genera_procedure(connection):
         q2 = """ SELECT * FROM public."Procedure" WHERE nome = '%s' """ % nome_proc
         extr_riga = read_query(connection, q2)
         riga_proc = extr_riga[0]
+        print(riga_proc)
         listaexcel = riga_proc[2]
+        print(listaexcel)
         listapath = riga_proc[3]
         colonne = riga_proc[4]
+        listapathshp = riga_proc[5]
         listacolonne = []
         for j in range(0, len(colonne)):
             listacolonne.append(ast.literal_eval(colonne[j]))  # questo perchè ogni elemento della lista è una stringa
             # che contiene a sua volta una lista ("[1,2,3]", con literal_eval torna una lista, e quindi creo una
             # lista di liste)
+
+        for i in range(0, len(listaexcel)):
+            file = listaexcel[i]
+            path = listapath[i]
+            lista_num_col = listacolonne[i]
+            pathshp = listapathshp[i]
+            model_class_str = file[0:-5]
+            file_dto = (model_class_str + "Dto")
+            caricamento = input("Se si vogliono caricare i dati all'interno del file " + file + "digitare 'si' "
+                                                                                                "\nAltrimenti premere"
+                                                                                                " invio per passare "
+                                                                                                "al successivo\n")
+            match6 = re.search("^\s*s\s*i\s*$", caricamento, re.IGNORECASE)
+            if match6:
+            # listapathshp DEVE ESSERE UNA LISTA DI ELEMENTI, NONE OPPURE STRINGA, E IN BASE A COSA C'è DENTRO VALUTO SE FARE TO_DTO O TO_DTO_GEOM
+                if pathshp is None:
+                    tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
+                else:
+                    tabled = dynamic_load.to_dto_geom(path, pathshp, file_dto, lista_num_col)
+
+                file_mapper = globals()[model_class_str + "Mapper"]()
+                str_par1 = parse_method_name(model_class_str)
+                metodo_par1 = "to_model_list_" + str_par1
+                metodo1 = getattr(file_mapper, metodo_par1)
+                models_list = metodo1(tabled)
+                file_repo = globals()[model_class_str + "Repo"](connection)
+                metodo_par2 = "populate_" + str_par1
+                metodo2 = getattr(file_repo, metodo_par2)
+                metodo2(models_list)
 
     else:
         print(dire)
@@ -131,6 +163,7 @@ def genera_procedure(connection):
         listaexcel = []
         listacolonne = []
         listacolonneproc = []
+        listapathshp = []
         for i in range(0, n):
             nome = input("Inserisci il nome del file excel da caricare, inclusa la sua estensione\n")
             if nome[-5:] == ".xlsx":
@@ -169,57 +202,56 @@ def genera_procedure(connection):
         print(listaexcel)
         print(listacolonne)
 
-    for i in range(0, len(listaexcel)):
-        file = listaexcel[i]
-        path = listapath[i]
-        print(path)
-        lista_num_col = listacolonne[i]
-        print(lista_num_col)
-        model_class_str = file[0:-5]
-        file_dto = (model_class_str + "Dto")
-        print(file_dto)
-        info = input("Se per il file "+ file + " si vogliono caricare dati relativi alla geometria digitare "
-                                               "'si'\nAltrimenti premere invio\n")
-        match = re.search("^\s*s\s*i\s*$", info, re.IGNORECASE)
-        if match:
-            nome = input("Se lo shapefile è già nel seguente path inserire il nome, includendo l'estensione del file\n"
-                    + str(dire) + "\nAltrimenti dopo il caricamento chiudere la finestra e riavviare.\n")
-            if nome[-4:] == ".shp":
-                path_shp = str(dire)+"\\"+nome
-                print(path_shp)
-            else:
-                nome1 = input("Il file non è stato fornito nel formato corretto.\nRiprovare\n")
-                if nome1[-4:] == ".shp":
-                    path_shp = str(dire) + "\\" + nome1
+        for i in range(0, len(listaexcel)):
+            file = listaexcel[i]
+            path = listapath[i]
+            lista_num_col = listacolonne[i]
+            model_class_str = file[0:-5]
+            file_dto = (model_class_str + "Dto")
+            info = input("Se per il file "+ file + " si vogliono caricare dati relativi alla geometria digitare "
+                                                   "'si'\nAltrimenti premere invio\n")
+            match = re.search("^\s*s\s*i\s*$", info, re.IGNORECASE)
+            if match:
+                nome = input("Se lo shapefile è già nel seguente path inserire il nome, includendo l'estensione del file\n"
+                        + str(dire) + "\nAltrimenti dopo il caricamento chiudere la finestra e riavviare.\n")
+                if nome[-4:] == ".shp":
+                    path_shp = str(dire)+"\\"+nome
                 else:
-                    break
-            tabled = dynamic_load.to_dto_geom(path, path_shp, file_dto, lista_num_col)
-        else:
-            tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
-        file_mapper = globals()[model_class_str + "Mapper"]()
-        str_par1 = parse_method_name(model_class_str)
-        metodo_par1 = "to_model_list_" + str_par1
-        metodo1 = getattr(file_mapper, metodo_par1)
-        models_list = metodo1(tabled)
-        file_repo = globals()[model_class_str + "Repo"](connection)
-        metodo_par2 = "populate_" + str_par1
-        metodo2 = getattr(file_repo, metodo_par2)
-        metodo2(models_list)
+                    nome1 = input("Il file non è stato fornito nel formato corretto.\nRiprovare\n")
+                    if nome1[-4:] == ".shp":
+                        path_shp = str(dire) + "\\" + nome1
+                    else:
+                        break
+                tabled = dynamic_load.to_dto_geom(path, path_shp, file_dto, lista_num_col)
+            else:
+                path_shp = None
+                tabled = dynamic_load.to_dto(path, file_dto, lista_num_col)
+            listapathshp.append(path_shp)
+            file_mapper = globals()[model_class_str + "Mapper"]()
+            str_par1 = parse_method_name(model_class_str)
+            metodo_par1 = "to_model_list_" + str_par1
+            metodo1 = getattr(file_mapper, metodo_par1)
+            models_list = metodo1(tabled)
+            file_repo = globals()[model_class_str + "Repo"](connection)
+            metodo_par2 = "populate_" + str_par1
+            metodo2 = getattr(file_repo, metodo_par2)
+            metodo2(models_list)
 
-    print('Insert effettuate correttamente')
+        print('Insert effettuate correttamente')
 
-    if not match1:
         nome_meth = input("Si desidera salvare questa procedura?\n Se si, inserire il nome che si vuole dare alla "
                           "procedura, altrimenti digitare 'no'\nN.B.: NON si può inserire un nome già esistente\n")
-        if nome_meth != "no":
+        match6 = re.search("^\s*n\s*o\s*$", nome_meth, re.IGNORECASE)
+        if not match6:
             num_id = len(lista_procedure) + 1
             insert_query = """ INSERT INTO "Procedure"  (
                         "id",
                         "nome",
                         "listaFileExcel",
-                        "listaPath",
-                        "listaColonne") VALUES (%s, %s, %s, %s, %s)"""
-            values_insert = (str(num_id), nome_meth, listaexcel, listapath, listacolonneproc)
+                        "listaPathXlsx",
+                        "listaColonne", 
+                        "listaPathShp") VALUES (%s, %s, %s, %s, %s, %s)"""
+            values_insert = (str(num_id), nome_meth, listaexcel, listapath, listacolonneproc, listapathshp)
             cursor = connection.cursor()
             cursor.execute(insert_query, values_insert)
             connection.commit()

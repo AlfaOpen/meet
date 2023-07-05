@@ -8,10 +8,7 @@ class SHPReader:
     def shp_reader(self, path):
         shapefile = gpd.read_file(path)
         print(shapefile.head())
-        # shapefile2 = shapefile.head()
-        nomi_colonne = list(shapefile)
-        print(nomi_colonne)
-        print(shapefile[nomi_colonne[1]])
+        # nomi_colonne = list(shapefile)
         self.geom = shapefile.geometry
         print("lunghezza file: " + str(len(self.geom)))
         return self.geom

@@ -11,7 +11,8 @@ from mapper.faults_all3d_mapper import FaultsAll3dMapper
 from repository.dao.faults_all3d_repository import FaultsAll3dRepo
 from model.boundary import Boundary
 from repository.connection.connection import Connection, close_connection
-from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_faults, clear_schema_geounit
+from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_faults, clear_schema_geounit, \
+    remake_schema_procedure
 from repository.dao.isoline_info_repository import IsolineInfoRepo
 from repository.reader.shp_reader import SHPReader
 from service import dynamic_load_service
@@ -30,6 +31,8 @@ def main():
 
     if not Connection.check_connection(opened_connection.connection):
         return logging.info("Error in connection")
+
+    # remake_schema_procedure(opened_connection.connection)
 
     # clear_schema_geounit(opened_connection.connection)
     # clear_schema_faults(opened_connection.connection)
@@ -62,13 +65,6 @@ def main():
 
     # shp1 = SHPReader()
     # shp1.shp_reader(r"C:\Users\giuli\PycharmProjects\pythonProject\faults_PoBasin.shp")
-
-
-    # id= "2"
-    # nome_m= "insert_geounit"
-    # list_excel = ['GeologicUnit.xlsx', 'Boundary.xlsx', 'BoundaryInfo.xlsx', 'CompositionPart.xlsx', 'GeologicalEvent.xlsx', 'Isoline.xlsx', 'IsolineGeometry.xlsx', 'IsolineInfo.xlsx']
-    # list_path = ['C:\\Users\\giuli\\PycharmProjects\\pythonProject\\GeologicUnit.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\Boundary.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\BoundaryInfo.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\CompositionPart.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\GeologicalEvent.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\Isoline.xlsx','C:\\Users\\giuli\\PycharmProjects\\pythonProject\\IsolineGeometry.xlsx', 'C:\\Users\\giuli\\PycharmProjects\\pythonProject\\IsolineInfo.xlsx']
-    # list_col = ['[]', '[]', '[0, 1, 2, 3, 4, 8]', '[0, 1, 3, 4, 5, 6]', '[0, 1, 3, 4]', '[]', '[]', '[0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12]']
 
 
     # delete_query(opened_connection.connection,"insert_geounit")
