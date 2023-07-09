@@ -11,18 +11,48 @@ services:
     ports:
       - "5050:80"
     networks:
-      - postgres
+      - postgres-network
+      - postgis-network
     restart: unless-stopped
 
   postgres:
+    container_name: postgres
     image: postgres:15.2
     environment:
       POSTGRES_USER: giulia
       PG_DATA: /data/postgres
       POSTGRES_PASSWORD: password
+    networks:
+      - postgres-network
+    ports:
+      - "5432:5432"
     volumes:
       - postgres:/data/postgres
+
+  postgis:
+    container_name: postgis
+    image: postgis/postgis:11-3.3-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: giulia
+      POSTGRES_DB: postgres
+      PGDATA: /data/postgis
+    volumes:
+      - postgis:/var/postgis
+    ports:
+      - "5433:5432"
+    networks:
+      - postgis-network
+    restart: unless-stopped
+
 
 volumes:
   pgadmin:
   postgres:
+  postgis:
+
+networks:
+  postgres-network:
+    driver: bridge
+  postgis-network:
+    driver: bridge

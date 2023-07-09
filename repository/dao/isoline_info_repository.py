@@ -3,7 +3,7 @@ from model.isoline_info import IsolineInfo
 
 def model_to_tuple_iso_info(model: IsolineInfo):
     return (str(model.get_id()),
-            str(model.get_isoline_id()),
+            str(model.get_geom_id()),
             str(model.get_iso_value()),
             str(model.get_x()),
             str(model.get_y()),
@@ -18,7 +18,7 @@ def model_to_tuple_iso_info(model: IsolineInfo):
 class IsolineInfoRepo:
     insert_query = """ INSERT INTO "IsolineInfo"  (
     "id",
-    "isoline",
+    "isolineGeometry",
     "isoValue",
     "x",
     "y",

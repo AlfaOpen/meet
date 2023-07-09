@@ -6,7 +6,7 @@ class Connection:
     connection = None
 
     def __init__(self):
-        self.connection = create_connection()
+        self.connection = create_connection_postgis()
 
     @classmethod
     def check_connection(cls, connection):
@@ -21,6 +21,13 @@ def create_connection():
                             password="password",
                             host="127.0.0.1",
                             port="5432",
+                            database="postgres")
+
+def create_connection_postgis():
+    return psycopg2.connect(user="giulia",
+                            password="password",
+                            host="127.0.0.1",
+                            port="5433",
                             database="postgres")
 
 

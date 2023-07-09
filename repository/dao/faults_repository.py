@@ -20,7 +20,8 @@ def model_to_tuple_faults(model: Faults):
             model.get_ref_type(),
             model.get_reference(),
             model.get_strike(),
-            model.get_uri())
+            model.get_uri(),
+            str(model.get_geometry()))
 
 
 class FaultsRepo:
@@ -43,7 +44,8 @@ class FaultsRepo:
     "refType",
     "reference",
     "strike",
-    "uri" ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+    "uri",
+     "geometry") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection

@@ -7,6 +7,7 @@ class FaultsAll3d:
         self._y = None
         self._depth = None
         self._local_name = None
+        self._geometry = None
 
     def get_id(self):  # PRIMARY KEY
         return self._id
@@ -43,3 +44,9 @@ class FaultsAll3d:
 
     def get_local_name(self):
         return self._local_name
+
+    def set_geometry(self, geometry):
+        self._geometry = geometry
+
+    def get_geometry(self):
+        return self._geometry

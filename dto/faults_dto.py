@@ -20,6 +20,7 @@ class FaultsDto:
         self._reference = None
         self._strike = None
         self._uri = None
+        self._geometry = None
 
     def get_id(self):  # PRIMARY KEY
         return self._id
@@ -134,3 +135,9 @@ class FaultsDto:
 
     def get_uri(self):
         return self._uri
+
+    def set_geometry(self, geometry):
+        self._geometry = geometry
+
+    def get_geometry(self):
+        return self._geometry

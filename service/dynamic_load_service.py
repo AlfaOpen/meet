@@ -7,11 +7,14 @@ from dto.faults_shp_dto import FaultsShpDto
 from dto.geologic_unit_dto import GeologicUnitDto
 from dto.geological_event_dto import GeologicalEventDto
 from dto.isoline_dto import IsolineDto
+from dto.isoline_geometry_dto import IsolineGeometryDto
 from dto.isoline_info_dto import IsolineInfoDto
 
 from repository.reader.csv_reader import CSVReader
 import openpyxl
+import geopandas as gpd
 
+from repository.reader.shp_reader import SHPReader
 from utility.parser import parse_method_name, parse_method_element
 
 
@@ -48,3 +51,44 @@ class DynamicLoad:
                 k += 1
             tabella.append(istanza)
         return tabella
+
+    def to_dto_geom(self, path_xlsx, path_shp, file_dto, index_col): #in questo caso prendo in ingresso 2 file, uno per le informazioni generali della geometria e l'altro proprio quelle dell'shp
+        shp = SHPReader()
+        csv = CSVReader()
+        csv.load_excel(path_xlsx)
+        the_geom = shp.shp_reader(path_shp)
+        print(the_geom)
+        csv.num_rows(csv.data)
+        if index_col is None or len(index_col) == 0:
+            nomi_col = list(csv.data)
+        else:
+            colonne = csv.data.iloc[:, index_col]
+            nomi_col = list(colonne)
+        csv.data['Geometry'] = the_geom
+        nomi_col.append('Geometry')
+        print(nomi_col)
+        tabella = []
+        k: int
+        for i in range(0, csv.nrows):
+            istanza = globals()[file_dto]()  # inizializzo un'istanza della classe file_dto, in particolare una
+            # diversa per ogni riga, quindi scorrendo nel ciclo riempio tutte le righe
+            k = 0
+            while k < len(nomi_col):
+                str_par = parse_method_name(nomi_col[k])
+                metodo_par = "set_" + str_par
+                metodo = getattr(istanza, metodo_par)
+                elemento = csv.data[nomi_col[k]][i]
+                if k == len(nomi_col)-1:
+                    nuovo_elemento = elemento
+                else:
+                    if type(elemento) is not str:
+                        nuovo_elemento = parse_method_element(elemento)
+                    else:
+                        nuovo_elemento = elemento
+                metodo(nuovo_elemento)
+                k += 1
+            tabella.append(istanza)
+        print("Lunghezza della tabella: "+ str(len(tabella)))
+        return tabella
+
+

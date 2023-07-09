@@ -2,7 +2,7 @@ class IsolineInfoDto:
 
     def __init__(self):
         self._id = None
-        self._isoline_id = None
+        self._geom_id = None
         self._iso_value = None
         self._x = None
         self._y = None
@@ -13,17 +13,18 @@ class IsolineInfoDto:
         self._distance = None
         self._angle = None
 
+
     def get_id(self):  # PRIMARY KEY
         return self._id
 
     def set_id(self, coordinate_id):
         self._id = coordinate_id
 
-    def get_isoline_id(self):  # FOREIGN KEY
-        return self._isoline_id
+    def get_geom_id(self):  # FOREIGN KEY
+        return self._geom_id
 
-    def set_isoline_id(self, isoline_id):
-        self._isoline_id = isoline_id
+    def set_geom_id(self, geom_id):
+        self._geom_id = geom_id
 
     def set_iso_value(self, iso_value):
         self._iso_value = iso_value
@@ -78,3 +79,4 @@ class IsolineInfoDto:
 
     def get_angle(self):
         return self._angle
+

@@ -180,8 +180,8 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 </dd></dl>
 
 </section>
-<section id="altre-funzioni">
-<h2>Altre Funzioni<a class="headerlink" href="#altre-funzioni" title="Permalink to this heading">¶</a></h2>
+<section id="automatizzazione-della-procedura">
+<h2>Automatizzazione della procedura<a class="headerlink" href="#automatizzazione-della-procedura" title="Permalink to this heading">¶</a></h2>
 <p>Una funzione che automatizza tutte le operazioni sopra descritte è il <code class="docutils literal notranslate"><span class="pre">mapper_cycle</span></code></p>
 <dl class="py function">
 <dt class="sig sig-object py" id="mapper_cycle">
@@ -189,11 +189,39 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <dd><p>Questa funzione prende in ingresso solo la connessione e una lista contenente a sua volta liste con gli indici delle colonne da considerare per ciascun file. In particolare, viene settato di default un path e questa funzione si prende tutti i file excel che trova lì; questi ultimi vengono riordinati (perchè la creazione delle tabelle avviene secondo l’ordine nella lista) e poi singolarmente a questi file vengono applicate le funzioni to_dto, to_model_list e populate_tabella (grazie ad opportune reflection).</p>
 </dd></dl>
 
-<p>Funzione per eliminare le tabelle dal database: <code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">schema</span></code></p>
+<p>Per rendere più generale possibile questa procedura è stata creata un ulteriore funzione, <code class="docutils literal notranslate"><span class="pre">genera_procedure</span></code></p>
 <dl class="py function">
-<dt class="sig sig-object py" id="clear_schema">
-<span class="sig-name descname"><span class="pre">clear_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema" title="Permalink to this definition">¶</a></dt>
-<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit.</p>
+<dt class="sig sig-object py" id="genera_procedure">
+<span class="sig-name descname"><span class="pre">genera_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genera_procedure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione consente non solo di svolgere tutti i passaggi precedenti in modo auomatico, chiedendo solo all’utente l’inserimento dei nomi dei file excel e degli indici delle colonne che vuole prendere da questi, ma permette inoltre di salvare i passaggi effettuati (quindi quali file excel sono stati caricati e quali colonne di questi) in modo da consentire di ripetere la procedura in modo completamente automatico. Più nel dettaglio: Inizialmente si chiede se si vogliono eliminare delle tabelle dal database, se si vogliono (ri)creare e, se sono presenti delle procedure già memorizzate, se si vuole scegliere una di queste.  Se si sceglie una procedura esistente, basterà inserire il suo nome e il resto verrà fatto in modo completamente automatico; se invece si vuole eseguire una nuova procedura, il programma chiede di inserire i file in una cartella, di indicarne il numero e infine, nell’ordine in cui vogliono sia caricati, il nome del file excel e gli indici delle colonne relative (mostrando le colonne presenti in ciascun file). Dopodichè, le successive operazioni vengono seguite in modo automatico, a meno che non si desidera inserire anche le informazioni geometriche in alcune tabelle; in questo caso, viene ulteriormente chiesto di inserire il nome dello shapefile da caricare. Infine, se si è scelta una procedura manuale si chiede se si vuole salvarla (affinchè la successiva volta non si debbano reinserire tutti i dati manualmente). NB: attualmente, le procedure memorizzate contengono i file excel e relative colonne, ma non gli shapefile, che comunque andranno reinseriti manualmente.</p>
+</dd></dl>
+
+</section>
+<section id="altre-funzioni">
+<h2>Altre Funzioni<a class="headerlink" href="#altre-funzioni" title="Permalink to this heading">¶</a></h2>
+<p>Funzione per eliminare le tabelle dal database: <code class="docutils literal notranslate"><span class="pre">clear_schema_all</span></code>, <code class="docutils literal notranslate"><span class="pre">clear_schema_geounit</span></code>, <code class="docutils literal notranslate"><span class="pre">clear_schema_faults</span></code>, <code class="docutils literal notranslate"><span class="pre">remake_schema_procedure</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="clear_schema_all">
+<span class="sig-name descname"><span class="pre">clear_schema_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit. Questa funzione elimina TUTTE le tabelle nel database (tranne quella “Procedure”).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="clear_schema_geounit">
+<span class="sig-name descname"><span class="pre">clear_schema_geounit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema_geounit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit. Questa funzione elimina le tabelle  relative all’unità geologica nel database.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="clear_schema_faults">
+<span class="sig-name descname"><span class="pre">clear_schema_faults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clear_schema_faults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui vengono specificate le tabelle da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit. Questa funzione elimina le tabelle relative alle faglie nel database.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="remake_schema_procedure">
+<span class="sig-name descname"><span class="pre">remake_schema_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#remake_schema_procedure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui viene specificata la tabella “Procedure” da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit.</p>
 </dd></dl>
 
 <p>Funzione per convertire una tabella in formato XML: <code class="docutils literal notranslate"><span class="pre">table_to_xml</span></code></p>
@@ -230,6 +258,7 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <li class="toctree-l2"><a class="reference internal" href="#caricamento-dati">Caricamento Dati</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mapping-to-models">Mapping to Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#metodi-di-insert">Metodi di Insert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatizzazione-della-procedura">Automatizzazione della procedura</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#altre-funzioni">Altre Funzioni</a></li>
 </ul>
 </li>

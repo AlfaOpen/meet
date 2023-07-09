@@ -71,3 +71,4 @@ class FaultsShp:
 
     def get_angle(self):
         return self._angle
+

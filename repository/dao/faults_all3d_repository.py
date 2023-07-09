@@ -7,7 +7,8 @@ def model_to_tuple_faults_all3d(model: FaultsAll3d):
             str(model.get_x()),
             str(model.get_y()),
             str(model.get_depth()),
-            str(model.get_local_name()))
+            str(model.get_local_name()),
+            str(model.get_geometry()))
 
 
 class FaultsAll3dRepo:
@@ -17,7 +18,8 @@ class FaultsAll3dRepo:
     "x",
     "y",
     "depth",
-    "localName") VALUES (%s, %s, %s, %s, %s, %s)"""
+    "localName",
+    "geometry") VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
     def __init__(self, connection):
         self.connection = connection

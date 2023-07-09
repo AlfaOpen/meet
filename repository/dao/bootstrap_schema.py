@@ -13,8 +13,8 @@ class BoostrapSchema:
 
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
-                           isoline(), isoline_info(), composition_part(),
-                           geological_event(), faults(), faults_shp(), faults_all_3d()]
+                           isoline(), isoline_geometry(), isoline_info(), composition_part(),
+                           geological_event(), faults(), faults_shp(), faults_all_3d(), procedure()]
 
     def execute_query(self, connection):
         cursor = connection.cursor()
@@ -73,6 +73,8 @@ def boundary_info():
     "y" float,
     "depth" float,
     "thickness" float,
+    "geometry" geometry,
+    
     CONSTRAINT "BoundaryInfo_pkey" PRIMARY KEY ("idInfo3D"),
     CONSTRAINT "BoundaryInfo_Boundaryid_fkey" FOREIGN KEY ("boundaryId")
         REFERENCES public."Boundary" ("idBoundary") MATCH SIMPLE
@@ -149,11 +151,31 @@ def isoline():
     return table_isoline
 
 
+def isoline_geometry():
+    table_isoline_geometry = '''CREATE TABLE IF NOT EXISTS public."IsolineGeometry"
+    (
+    "idIsolineGeometry" varchar NOT NULL,
+    "isoline" varchar,
+    "idIsobata" integer,
+    "geometry" geometry,
+    CONSTRAINT "IsolineGeometry_pkey" PRIMARY KEY ("idIsolineGeometry"),
+    CONSTRAINT "IsolineGeometry_Isoline_fkey" FOREIGN KEY ("isoline")
+        REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."IsolineGeometry"
+        OWNER to giulia;'''
+
+    return table_isoline_geometry
+
+
 def isoline_info():
     table_isoline_info = '''CREATE TABLE IF NOT EXISTS public."IsolineInfo"
     (
     "id" integer NOT NULL,
-    isoline varchar,
+    "isolineGeometry" varchar,
     "isoValue" integer,
     "x" float,
     "y" float,
@@ -162,11 +184,10 @@ def isoline_info():
     "vertexPart" integer,
     "vertexPartIndex" integer,
     "distance" float,
-    "angle" float,
-    
+    "angle" float,    
     CONSTRAINT "IsolineInfo_pkey" PRIMARY KEY ("id"),
-    CONSTRAINT "IsolineInfo_Isoline_fkey" FOREIGN KEY ("isoline")
-        REFERENCES public."Isoline" ("idIsoline") MATCH SIMPLE
+    CONSTRAINT "IsolineInfo_IsolineGeoemtry_fkey" FOREIGN KEY ("isolineGeometry")
+        REFERENCES public."IsolineGeometry" ("idIsolineGeometry") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
     )
@@ -199,6 +220,7 @@ def faults():
     "reference" varchar,
     "strike" varchar,
     "uri" varchar,
+    "geometry" geometry,
     
     CONSTRAINT "Faults._pkey" PRIMARY KEY ("id")
     )
@@ -232,7 +254,7 @@ def faults_shp():
     TABLESPACE pg_default;
     ALTER TABLE IF EXISTS public."FaultsShp"
         OWNER to giulia;'''
-    
+
     return table_faults_shp
 
 
@@ -245,6 +267,7 @@ def faults_all_3d():
     "y" float,
     "depth" float,
     "localName" varchar,
+    "geometry" geometry,
 
     CONSTRAINT "FaultsAll3d_pkey" PRIMARY KEY ("id"),
     CONSTRAINT "FaultsAll3d_Faults_fkey" FOREIGN KEY ("faultId")
@@ -258,7 +281,28 @@ def faults_all_3d():
 
     return table_faults_all_3d
 
-# def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni 
+
+def procedure():
+    table_procedure = '''CREATE TABLE IF NOT EXISTS public."Procedure"
+        (
+        "id" int NOT NULL, 
+        "nome" varchar UNIQUE,
+        "listaFileExcel" text[],
+        "listaPathXlsx" text[], 
+        "listaColonne" text[],
+        "listaPathShp" text[],
+
+        CONSTRAINT "Procedure_pkey" PRIMARY KEY ("id")
+        )
+        TABLESPACE pg_default;
+        ALTER TABLE IF EXISTS public."Procedure"
+            OWNER to giulia;'''
+
+    return table_procedure
+
+
+
+# def mapper_cycle scorre gli excel, si fa da solo i dto dall'excel, dal nome del dto si fa il mapper e per ogni
 # uscita del mapper fa da solo il repository con le insert
 
 def mapper_cycle(connection, lista_colonne):
@@ -300,13 +344,39 @@ def mapper_cycle(connection, lista_colonne):
     print('Insert effettuate correttamente')
 
 
-def clear_schema(connection):
+def clear_schema_all(connection):
     drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
      public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)
     connection.commit()
     print('Tutte le tabelle sono state eliminate')
+
+
+def clear_schema_geounit(connection):
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
+     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    connection.commit()
+    print('Le tabelle selezionate sono state eliminate')
+
+
+def clear_schema_faults(connection):
+    drop_query = '''DROP TABLE if exists public."Faults", public."FaultsShp", public."FaultsAll3d" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    connection.commit()
+    print('Le tabelle selezionate sono state eliminate')
+
+
+def remake_schema_procedure(connection):
+    drop_query = '''DROP TABLE if exists public."Procedure" '''
+    cursor = connection.cursor()
+    cursor.execute(drop_query)
+    cursor.execute(procedure())
+    connection.commit()
+    print('La tabella procedura è stata eliminata e nuovamente creata')
 
 # public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
 #     public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit"
