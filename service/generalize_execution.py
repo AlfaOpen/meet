@@ -7,9 +7,10 @@ import time
 import geopandas as gpd
 import re
 
-
+from mapper.isoline_geometry_mapper import IsolineGeometryMapper
 from repository.dao.bootstrap_schema import BoostrapSchema, mapper_cycle, clear_schema_all, clear_schema_geounit, \
     clear_schema_faults, remake_schema_procedure
+from repository.dao.isoline_geometry_repository import IsolineGeometryRepo
 
 from repository.reader.csv_reader import CSVReader
 from repository.reader.shp_reader import SHPReader
@@ -126,7 +127,7 @@ def genera_procedure(connection):
             pathshp = listapathshp[i]
             model_class_str = file[0:-5]
             file_dto = (model_class_str + "Dto")
-            caricamento = input("Se si vogliono caricare i dati all'interno del file " + file + "digitare 'si' "
+            caricamento = input("Se si vogliono caricare i dati all'interno del file " + file + " digitare 'si' "
                                                                                                 "\nAltrimenti premere"
                                                                                                 " invio per passare "
                                                                                                 "al successivo\n")

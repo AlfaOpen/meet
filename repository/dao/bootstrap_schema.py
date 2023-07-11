@@ -345,7 +345,7 @@ def mapper_cycle(connection, lista_colonne):
 
 
 def clear_schema_all(connection):
-    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo",
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
      public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)

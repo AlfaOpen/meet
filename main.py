@@ -64,7 +64,7 @@ def main():
     genera_procedure(opened_connection.connection)
 
     # shp1 = SHPReader()
-    # shp1.shp_reader(r"C:\Users\giuli\PycharmProjects\pythonProject\faults_PoBasin.shp")
+    # shp1.shp_reader(r"C:\Users\giuli\PycharmProjects\pythonProject\faults_All_geom.shp")
 
 
     # delete_query(opened_connection.connection,"insert_geounit")
