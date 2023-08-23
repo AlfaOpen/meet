@@ -78,7 +78,7 @@ class DynamicLoad:
                 metodo_par = "set_" + str_par
                 metodo = getattr(istanza, metodo_par)
                 elemento = csv.data[nomi_col[k]][i]
-                if k == len(nomi_col)-1:
+                if k == len(nomi_col)-1: #geometria
                     nuovo_elemento = elemento
                 else:
                     if type(elemento) is not str:

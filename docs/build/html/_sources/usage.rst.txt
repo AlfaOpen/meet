@@ -53,14 +53,27 @@ La classe ``CSV Reader`` può essere utilizzata per leggere gli excel.
 
         restituisce solo parte della tabella, quella relativa alle colonne selezionate (prende in ingresso la tabella e una lista di colonne)
 
+La classe ``SHP Reader`` può essere utilizzata per leggere gli shapefile (da cui prendere le informazioni geometriche).
 
-La classe ``Dynamic Load`` viene utilizzata per caricare in ciascun file dto i dati presi dalle tabelle excel.
+.. py:class:: SHPReader(geom)
+
+    :geom: viene restituito dal metodo ``shp_reader``
+
+    .. py:classmethod:: shp_reader (path)
+
+        questo metodo serve per caricare i dati relativi alla geometria. Si può scegliere se caricare tutti i dati della geometria (in questo caso si passa subito all’else finale e si prendono tutti i dati) oppure se caricarne solo una parte (può essere utile per fare prove con dati di dimensione inferiore); in quest'ultimo caso, la scelta si suddivide tra geo_unit e faglie: per geo_unit, c’è un if all’interno del ciclo for in cui si specifica il nome della boundary per cui prendere i dati; per la geometria 3D relativa alle faglie (file FaultsAll3D) nel ciclo for è stato impostato un numero arbitrario di punti (1065) da prendere. Per la tabella Faults (geometria 2D) vanno prese invece tutte le info relative alla geometria.
+
+La classe ``Dynamic Load`` viene utilizzata per caricare in ciascun file dto i dati mediante i metodi esposti in precedenza. Se si desidera caricare nel file dto anche informazioni geometriche, si utilizzerà il metodo ``to_dto_geom``, altrimenti semplicemente il metodo ``to_dto``
 
 .. py:class:: DynamicLoad
 
     .. py:classmethod:: to_dto (path, file_dto, index_col)
 
         questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall'excel. Con due cicli for annidati (all'esterno sulle colonne, all'interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.
+
+    .. py:classmethod:: to_dto_geom (path_xlsx, path_shp, file_dto, index_col)
+
+        questo metodo vuole in ingresso il path del file excel, il path dello shapefile (per le info geometriche), il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella excel. Da un lato, mediante il path dell'excel e i metodi di CSVReader i dati delle colonne selezionate vengono presi dalla tabella; dall'altro, mediante il path dello shapefile e il metodo shp_reader i dati geometrici vengono caricati e aggiunti come ulteriore colonna della tabella. Con due cicli for annidati (all'esterno sulle colonne, all'interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.
 
 Più nel dettaglio, i nomi delle colonne degli excel vengono modificate mediante i metodi parser affinchè corrispondano alle funzione di set e get di ciascun dto:
 
@@ -115,7 +128,14 @@ Per rendere più generale possibile questa procedura è stata creata un ulterior
 
 .. py:function:: genera_procedure (connection)
 
-    Questa funzione consente non solo di svolgere tutti i passaggi precedenti in modo auomatico, chiedendo solo all'utente l'inserimento dei nomi dei file excel e degli indici delle colonne che vuole prendere da questi, ma permette inoltre di salvare i passaggi effettuati (quindi quali file excel sono stati caricati e quali colonne di questi) in modo da consentire di ripetere la procedura in modo completamente automatico. Più nel dettaglio: Inizialmente si chiede se si vogliono eliminare delle tabelle dal database, se si vogliono (ri)creare e, se sono presenti delle procedure già memorizzate, se si vuole scegliere una di queste.  Se si sceglie una procedura esistente, basterà inserire il suo nome e il resto verrà fatto in modo completamente automatico; se invece si vuole eseguire una nuova procedura, il programma chiede di inserire i file in una cartella, di indicarne il numero e infine, nell'ordine in cui vogliono sia caricati, il nome del file excel e gli indici delle colonne relative (mostrando le colonne presenti in ciascun file). Dopodichè, le successive operazioni vengono seguite in modo automatico, a meno che non si desidera inserire anche le informazioni geometriche in alcune tabelle; in questo caso, viene ulteriormente chiesto di inserire il nome dello shapefile da caricare. Infine, se si è scelta una procedura manuale si chiede se si vuole salvarla (affinchè la successiva volta non si debbano reinserire tutti i dati manualmente). NB: attualmente, le procedure memorizzate contengono i file excel e relative colonne, ma non gli shapefile, che comunque andranno reinseriti manualmente.
+    Questa funzione consente non solo di svolgere tutti i passaggi precedenti in modo automatico,
+    chiedendo solo all'utente l'inserimento dei nomi dei file excel e degli indici delle colonne che vuole prendere da questi, ma permette inoltre di salvare i passaggi effettuati (quindi quali file excel sono stati caricati e quali colonne di questi) in modo da consentire di ripetere la procedura in modo completamente automatico.
+    Più nel dettaglio: Inizialmente si chiede se si vogliono eliminare delle tabelle dal database, se si vogliono (ri)creare e, se sono presenti delle procedure già memorizzate, se si vuole scegliere una di queste.
+    Se si sceglie una procedura esistente, basterà inserire il suo nome e il resto verrà fatto in modo quasi completamente automatico;
+    le uniche interazioni in questo caso servono infatti a selezionare per quali tabelle si desidera caricare i dati (in modo da non dover riempirle obbligatoriamente tutte) e, in caso di caricamento di informazioni geometriche, vengono richieste altre informazioni(fare riferimento al metodo shp_reader).
+    Se invece si vuole eseguire una nuova procedura, il programma chiede di inserire i file in una cartella, di indicarne il numero e infine, nell'ordine in cui vogliono sia caricati, il nome di ciascun file excel e gli indici delle colonne relative (mostrando le colonne presenti in ciascun file).
+    Dopodichè, le successive operazioni vengono eseguite in modo automatico, a meno che non si desidera inserire anche le informazioni geometriche in alcune tabelle; in questo caso, viene ulteriormente chiesto di inserire il nome dello shapefile da caricare.
+    Infine, se si è scelta una procedura manuale si chiede se si vuole salvarla (affinchè la successiva volta non si debbano reinserire tutti i dati manualmente).
 
 
 Altre Funzioni
@@ -137,7 +157,7 @@ Funzione per eliminare le tabelle dal database: ``clear_schema_all``, ``clear_sc
 
 .. py:function:: remake_schema_procedure (connection)
 
-    Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui viene specificata la tabella "Procedure" da eliminare e l'eliminazione viene eseguita mediante i comandi di execute e commit.
+    Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui viene specificata la tabella "Procedure" da eliminare e l'eliminazione viene eseguita mediante i comandi di execute e commit; dopodichè la tabella viene nuovamente creata.
 
 Funzione per convertire una tabella in formato XML: ``table_to_xml``
 

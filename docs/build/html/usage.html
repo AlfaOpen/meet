@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to ISPRA PROJECT’s documentation!" href="index.html" />
+    <link rel="prev" title="Welcome to PNRR MEET PROJECT’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -112,7 +112,24 @@
 
 </dd></dl>
 
-<p>La classe <code class="docutils literal notranslate"><span class="pre">Dynamic</span> <span class="pre">Load</span></code> viene utilizzata per caricare in ciascun file dto i dati presi dalle tabelle excel.</p>
+<p>La classe <code class="docutils literal notranslate"><span class="pre">SHP</span> <span class="pre">Reader</span></code> può essere utilizzata per leggere gli shapefile (da cui prendere le informazioni geometriche).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="SHPReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SHPReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SHPReader" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Geom<span class="colon">:</span></dt>
+<dd class="field-odd"><p>viene restituito dal metodo <code class="docutils literal notranslate"><span class="pre">shp_reader</span></code></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="SHPReader.shp_reader">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shp_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SHPReader.shp_reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>questo metodo serve per caricare i dati relativi alla geometria. Si può scegliere se caricare tutti i dati della geometria (in questo caso si passa subito all’else finale e si prendono tutti i dati) oppure se caricarne solo una parte (può essere utile per fare prove con dati di dimensione inferiore); in quest’ultimo caso, la scelta si suddivide tra geo_unit e faglie: per geo_unit, c’è un if all’interno del ciclo for in cui si specifica il nome della boundary per cui prendere i dati; per la geometria 3D relativa alle faglie (file FaultsAll3D) nel ciclo for è stato impostato un numero arbitrario di punti (1065) da prendere. Per la tabella Faults (geometria 2D) vanno prese invece tutte le info relative alla geometria.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>La classe <code class="docutils literal notranslate"><span class="pre">Dynamic</span> <span class="pre">Load</span></code> viene utilizzata per caricare in ciascun file dto i dati mediante i metodi esposti in precedenza. Se si desidera caricare nel file dto anche informazioni geometriche, si utilizzerà il metodo <code class="docutils literal notranslate"><span class="pre">to_dto_geom</span></code>, altrimenti semplicemente il metodo <code class="docutils literal notranslate"><span class="pre">to_dto</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="DynamicLoad">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DynamicLoad</span></span><a class="headerlink" href="#DynamicLoad" title="Permalink to this definition">¶</a></dt>
@@ -120,6 +137,12 @@
 <dt class="sig sig-object py" id="DynamicLoad.to_dto">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_dto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DynamicLoad.to_dto" title="Permalink to this definition">¶</a></dt>
 <dd><p>questo metodo vuole in ingresso il path, il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella. Mediante il path e i metodi di CSVReader i dati delle colonne selezionate vengono presi dall’excel. Con due cicli for annidati (all’esterno sulle colonne, all’interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DynamicLoad.to_dto_geom">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dto_geom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_xlsx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_shp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_dto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DynamicLoad.to_dto_geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>questo metodo vuole in ingresso il path del file excel, il path dello shapefile (per le info geometriche), il file dto in cui vanno mappati i dati e gli indici delle colonne da considerare nella tabella excel. Da un lato, mediante il path dell’excel e i metodi di CSVReader i dati delle colonne selezionate vengono presi dalla tabella; dall’altro, mediante il path dello shapefile e il metodo shp_reader i dati geometrici vengono caricati e aggiunti come ulteriore colonna della tabella. Con due cicli for annidati (all’esterno sulle colonne, all’interno sulle righe) seleziono ogni elemento e lo aggiungo al dto mediante i metodi get e set di ciascun dto.</p>
 </dd></dl>
 
 </dd></dl>
@@ -193,7 +216,14 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <dl class="py function">
 <dt class="sig sig-object py" id="genera_procedure">
 <span class="sig-name descname"><span class="pre">genera_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genera_procedure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Questa funzione consente non solo di svolgere tutti i passaggi precedenti in modo auomatico, chiedendo solo all’utente l’inserimento dei nomi dei file excel e degli indici delle colonne che vuole prendere da questi, ma permette inoltre di salvare i passaggi effettuati (quindi quali file excel sono stati caricati e quali colonne di questi) in modo da consentire di ripetere la procedura in modo completamente automatico. Più nel dettaglio: Inizialmente si chiede se si vogliono eliminare delle tabelle dal database, se si vogliono (ri)creare e, se sono presenti delle procedure già memorizzate, se si vuole scegliere una di queste.  Se si sceglie una procedura esistente, basterà inserire il suo nome e il resto verrà fatto in modo completamente automatico; se invece si vuole eseguire una nuova procedura, il programma chiede di inserire i file in una cartella, di indicarne il numero e infine, nell’ordine in cui vogliono sia caricati, il nome del file excel e gli indici delle colonne relative (mostrando le colonne presenti in ciascun file). Dopodichè, le successive operazioni vengono seguite in modo automatico, a meno che non si desidera inserire anche le informazioni geometriche in alcune tabelle; in questo caso, viene ulteriormente chiesto di inserire il nome dello shapefile da caricare. Infine, se si è scelta una procedura manuale si chiede se si vuole salvarla (affinchè la successiva volta non si debbano reinserire tutti i dati manualmente). NB: attualmente, le procedure memorizzate contengono i file excel e relative colonne, ma non gli shapefile, che comunque andranno reinseriti manualmente.</p>
+<dd><p>Questa funzione consente non solo di svolgere tutti i passaggi precedenti in modo automatico,
+chiedendo solo all’utente l’inserimento dei nomi dei file excel e degli indici delle colonne che vuole prendere da questi, ma permette inoltre di salvare i passaggi effettuati (quindi quali file excel sono stati caricati e quali colonne di questi) in modo da consentire di ripetere la procedura in modo completamente automatico.
+Più nel dettaglio: Inizialmente si chiede se si vogliono eliminare delle tabelle dal database, se si vogliono (ri)creare e, se sono presenti delle procedure già memorizzate, se si vuole scegliere una di queste.
+Se si sceglie una procedura esistente, basterà inserire il suo nome e il resto verrà fatto in modo quasi completamente automatico;
+le uniche interazioni in questo caso servono infatti a selezionare per quali tabelle si desidera caricare i dati (in modo da non dover riempirle obbligatoriamente tutte) e, in caso di caricamento di informazioni geometriche, vengono richieste altre informazioni(fare riferimento al metodo shp_reader).
+Se invece si vuole eseguire una nuova procedura, il programma chiede di inserire i file in una cartella, di indicarne il numero e infine, nell’ordine in cui vogliono sia caricati, il nome di ciascun file excel e gli indici delle colonne relative (mostrando le colonne presenti in ciascun file).
+Dopodichè, le successive operazioni vengono eseguite in modo automatico, a meno che non si desidera inserire anche le informazioni geometriche in alcune tabelle; in questo caso, viene ulteriormente chiesto di inserire il nome dello shapefile da caricare.
+Infine, se si è scelta una procedura manuale si chiede se si vuole salvarla (affinchè la successiva volta non si debbano reinserire tutti i dati manualmente).</p>
 </dd></dl>
 
 </section>
@@ -221,7 +251,7 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <dl class="py function">
 <dt class="sig sig-object py" id="remake_schema_procedure">
 <span class="sig-name descname"><span class="pre">remake_schema_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#remake_schema_procedure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui viene specificata la tabella “Procedure” da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit.</p>
+<dd><p>Questa funzione prende in ingresso la connessione; al suo interno viene definita la query in cui viene specificata la tabella “Procedure” da eliminare e l’eliminazione viene eseguita mediante i comandi di execute e commit; dopodichè la tabella viene nuovamente creata.</p>
 </dd></dl>
 
 <p>Funzione per convertire una tabella in formato XML: <code class="docutils literal notranslate"><span class="pre">table_to_xml</span></code></p>
@@ -268,7 +298,7 @@ Questo avviene all’interno dei metodi definiti nella classe <code class="docut
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to ISPRA PROJECT’s documentation!</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to PNRR MEET PROJECT’s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
