@@ -13,7 +13,7 @@ class BoostrapSchema:
 
     def __init__(self):
         self.table_list = [geologic_unit(), boundary(), boundary_info(),
-                           isoline(), isoline_geometry(), isoline_info(), composition_part(),
+                           isoline(), isoline_geometry(), isoline_info(), composition_part(), composition_part1(),
                            geological_event(), faults(), faults_shp(), faults_all_3d(), procedure()]
 
     def execute_query(self, connection):
@@ -109,6 +109,24 @@ def composition_part():
 
     return table_composition_part
 
+def composition_part1():
+    table_composition_part1 = '''CREATE TABLE IF NOT EXISTS public."CompositionPart1"
+    (
+    "idPart" integer NOT NULL,
+    geoUnit varchar,
+    "Material" varchar,
+    "Role" varchar,
+    CONSTRAINT "CompositionPart1_pkey" PRIMARY KEY ("idPart"),
+    CONSTRAINT "CompositionPart1_geoUnit_fkey" FOREIGN KEY (geoUnit)
+        REFERENCES public."GeologicUnit" ("inspireId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+    )
+    TABLESPACE pg_default;
+    ALTER TABLE IF EXISTS public."CompositionPart1"
+        OWNER to giulia;'''
+
+    return table_composition_part1
 
 def geological_event():
     table_geological_event = '''CREATE TABLE IF NOT EXISTS public."GeologicalEvent"
@@ -345,7 +363,7 @@ def mapper_cycle(connection, lista_colonne):
 
 
 def clear_schema_all(connection):
-    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."CompositionPart1", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
      public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit", public."Faults", public."FaultsShp", public."FaultsAll3d" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)
@@ -354,7 +372,7 @@ def clear_schema_all(connection):
 
 
 def clear_schema_geounit(connection):
-    drop_query = '''DROP TABLE if exists public."CompositionPart", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
+    drop_query = '''DROP TABLE if exists public."CompositionPart", public."CompositionPart1", public."GeologicalEvent", public."IsolineInfo", public."IsolineGeometry",
      public."Isoline", public."BoundaryInfo", public."Boundary", public."GeologicUnit" '''
     cursor = connection.cursor()
     cursor.execute(drop_query)

@@ -3,7 +3,7 @@ from model.faults_all3d import FaultsAll3d
 
 def model_to_tuple_faults_all3d(model: FaultsAll3d):
     return (str(model.get_id()),
-            str((model.get_fault_id())),
+            (model.get_fault_id()),
             str(model.get_x()),
             str(model.get_y()),
             str(model.get_depth()),
