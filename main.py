@@ -68,6 +68,11 @@ def main():
 
 
     # delete_query(opened_connection.connection,"insert_geounit")
+    # drop_query = '''DROP TABLE if exists public."IsolineInfo", public."IsolineGeometry",
+    #      public."BoundaryInfo", public."FaultsAll3d" '''
+    # cursor = opened_connection.connection.cursor()
+    # cursor.execute(drop_query)
+    # opened_connection.connection.commit()
 
     # table_to_xml("FaultsAll3d", "public", opened_connection.connection)
 
